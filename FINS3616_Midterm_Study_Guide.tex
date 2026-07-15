@@ -1,0 +1,1893 @@
+\documentclass[11pt,a4paper]{article}
+
+%% ── Packages ─────────────────────────────────────────────────────────────────
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{unicode-math}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{wasysym}
+
+%% ── Fonts ────────────────────────────────────────────────────────────────────
+\setmainfont{TeX Gyre Pagella}[Ligatures=TeX]
+\setmathfont{TeX Gyre Pagella Math}
+
+%% ── Page geometry ────────────────────────────────────────────────────────────
+\geometry{
+  a4paper,
+  top=2.5cm, bottom=2.5cm,
+  left=2.5cm, right=2.5cm,
+  headheight=15pt
+}
+
+%% ── Colours ──────────────────────────────────────────────────────────────────
+\definecolor{FormulaGreenDark}{RGB}{34,120,58}
+\definecolor{FormulaGreenLight}{RGB}{230,248,234}
+\definecolor{ConceptPurpleDark}{RGB}{88,44,140}
+\definecolor{ConceptPurpleLight}{RGB}{240,232,252}
+\definecolor{MistakeRedDark}{RGB}{180,40,40}
+\definecolor{MistakeRedLight}{RGB}{253,232,232}
+\definecolor{MethodBlueDark}{RGB}{25,80,160}
+\definecolor{MethodBlueLight}{RGB}{230,240,255}
+\definecolor{TipGoldDark}{RGB}{160,130,20}
+\definecolor{TipGoldLight}{RGB}{255,252,220}
+\definecolor{SectionRule}{RGB}{70,70,70}
+\definecolor{HeadingColor}{RGB}{20,40,80}
+\definecolor{TextGrey}{RGB}{50,50,50}
+
+%% ── tcolorbox styles ─────────────────────────────────────────────────────────
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{formulabox}[1]{
+  enhanced,breakable,
+  colback=FormulaGreenLight,
+  colframe=FormulaGreenDark,
+  colbacktitle=FormulaGreenDark,
+  coltitle=white,
+  fonttitle=\bfseries\small,
+  title={Key Formula: #1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  before skip=8pt, after skip=8pt
+}
+
+\newtcolorbox{conceptbox}[1]{
+  enhanced,breakable,
+  colback=ConceptPurpleLight,
+  colframe=ConceptPurpleDark,
+  colbacktitle=ConceptPurpleDark,
+  coltitle=white,
+  fonttitle=\bfseries\small,
+  title={Core Concept: #1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  before skip=8pt, after skip=8pt
+}
+
+\newtcolorbox{mistakebox}[1]{
+  enhanced,breakable,
+  colback=MistakeRedLight,
+  colframe=MistakeRedDark,
+  colbacktitle=MistakeRedDark,
+  coltitle=white,
+  fonttitle=\bfseries\small,
+  title={Common Mistake: #1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  before skip=8pt, after skip=8pt
+}
+
+\newtcolorbox{methodbox}[1]{
+  enhanced,breakable,
+  colback=MethodBlueLight,
+  colframe=MethodBlueDark,
+  colbacktitle=MethodBlueDark,
+  coltitle=white,
+  fonttitle=\bfseries\small,
+  title={Exam Method: #1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  before skip=8pt, after skip=8pt
+}
+
+\newtcolorbox{tipbox}{
+  enhanced,breakable,
+  colback=TipGoldLight,
+  colframe=TipGoldDark,
+  colbacktitle=TipGoldDark,
+  coltitle=white,
+  fonttitle=\bfseries\small,
+  title={Exam Tip},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  before skip=8pt, after skip=8pt
+}
+
+%% ── Headings ─────────────────────────────────────────────────────────────────
+\color{TextGrey}
+\titleformat{\section}[block]
+  {\large\bfseries\color{HeadingColor}}
+  {\thesection}{1em}{}
+  [\vspace{-4pt}\rule{\textwidth}{0.8pt}\vspace{2pt}]
+
+\titleformat{\subsection}[block]
+  {\normalsize\bfseries\color{HeadingColor}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}[runin]
+  {\normalsize\bfseries}
+  {}{0pt}{}[.\quad]
+
+\titlespacing*{\section}{0pt}{18pt}{8pt}
+\titlespacing*{\subsection}{0pt}{12pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{4pt}
+
+%% ── Header/footer ────────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\itshape FINS3616 Midterm Study Guide}
+\fancyhead[R]{\small\itshape Weeks 1--4}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%% ── Paragraph spacing ────────────────────────────────────────────────────────
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+\setstretch{1.18}
+
+%% ── List settings ────────────────────────────────────────────────────────────
+\setlist[itemize]{leftmargin=1.4em,itemsep=2pt,parsep=0pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=1.6em,itemsep=2pt,parsep=0pt,topsep=3pt}
+
+%% ── Hyperref ─────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=HeadingColor,
+  urlcolor=MethodBlueDark,
+  pdfauthor={FINS3616 Course Materials},
+  pdftitle={FINS3616 Midterm Study Guide}
+}
+
+%% ── ToC depth ────────────────────────────────────────────────────────────────
+\setcounter{tocdepth}{2}
+
+%% ── Checkbox helper ──────────────────────────────────────────────────────────
+\newcommand{\cb}{\(\square\)\enspace}
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+\pagenumbering{roman}
+
+%% ── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+{\fontsize{26}{32}\bfseries\color{HeadingColor} FINS3616 Midterm Study Guide\par}
+\vspace{0.6cm}
+{\large\color{HeadingColor} Weeks 1--4: Integrated Course Notes, Tutorial Methods,\\ Key Formulas and Worked Examples\par}
+\vspace{0.5cm}
+\rule{0.6\textwidth}{0.8pt}
+\vspace{0.4cm}
+
+{\normalsize Built from lecture slides, lecture transcripts, tutorials, textbook material,\\
+testbank questions and supplementary course resources\par}
+\vspace{0.4cm}
+{\normalsize 2026\par}
+\vspace{1.5cm}
+\rule{0.6\textwidth}{0.4pt}
+\vspace{0.4cm}
+
+{\small\itshape Course: FINS3616 International Business Finance\\
+University of New South Wales (UNSW)\\
+Term 2, 2026\par}
+\end{center}
+\newpage
+
+%% ── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Course and Midterm Overview}
+
+FINS3616 International Business Finance is a third-year course that extends standard corporate finance into the global arena. The course equips students with the conceptual and quantitative tools used by the finance teams of multinational corporations (MNCs): from understanding why firms operate across borders, to pricing foreign exchange, applying the major international parity conditions, and using derivative instruments to manage currency risk.
+
+\subsection{Midterm Coverage}
+
+The midterm examination covers Weeks 1 through 4 of the course. These four weeks form a coherent foundation:
+
+\begin{itemize}
+  \item \textbf{Week 1 (Chapters 1 and 2):} Why MNCs exist; exchange rate fundamentals, notation, supply and demand for currencies, and the factors that determine exchange rates.
+  \item \textbf{Week 2 (Chapters 6 and 4 Part 1):} The organisation and mechanics of the foreign exchange market; purchasing power parity (PPP) — absolute and relative versions.
+  \item \textbf{Week 3 (Chapter 4 Parts 2 and 3):} Fisher effect; International Fisher effect; interest rate parity; unbiased forward rates; and currency forecasting.
+  \item \textbf{Week 4 (Chapters 7 and 8):} Currency futures contracts; currency options (calls and puts); interest rate swaps; currency swaps.
+\end{itemize}
+
+\subsection{Analytical Skills Tested}
+
+The examination tests both conceptual understanding and quantitative calculation. Students are expected to:
+
+\begin{itemize}
+  \item Define and explain key theoretical relationships precisely.
+  \item Perform multi-step numerical calculations, showing full working.
+  \item Interpret calculated results in economic and financial terms.
+  \item Identify when a relationship holds, when it does not, and why.
+  \item Apply hedging mechanics to MNC scenarios involving futures, options, and swaps.
+\end{itemize}
+
+Tutorial questions are the best guide to what is examinable. Every tutorial question type that appears in the repository has been integrated into the relevant section of these notes.
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Week 1 — Multinational Corporations and Exchange Rate Basics}
+
+\subsection{Weekly Overview}
+
+Week 1 establishes two essential foundations. The first lecture (Chapter 1) asks why large multinational corporations exist and what risks they face. This is not a peripheral topic: the entire course is motivated by the need to manage the exchange-rate risk, political risk, and regulatory differences that arise when a firm operates across borders. The second lecture (Chapter 2) introduces the mechanics of exchange rates — how they are quoted, what determines them at equilibrium, and how central banks intervene.
+
+Understanding these foundations is critical because every subsequent week assumes students can (a) identify the type of currency exposure an MNC faces, and (b) convert prices and calculate exchange rates fluently.
+
+\subsection{Learning Outcomes}
+
+After studying Week 1, students should be able to:
+\begin{itemize}
+  \item Define a multinational corporation and explain why firms internationalise.
+  \item Identify the main risk exposures of MNCs (exchange-rate, political, regulatory).
+  \item Define an exchange rate and explain the textbook notation used in this course.
+  \item Calculate prices of foreign goods using a spot exchange rate.
+  \item Compute cross rates between two non-USD currencies.
+  \item Explain the supply and demand model of exchange rate determination.
+  \item Describe how inflation, interest rates, growth, and political risk affect exchange rates.
+  \item Distinguish between sterilised and unsterilised central bank intervention.
+  \item Calculate the percentage depreciation or appreciation of a currency.
+\end{itemize}
+
+\subsection{What is a Multinational Corporation?}
+
+\begin{conceptbox}{The Multinational Corporation}
+An MNC produces and sells goods or services in more than one country. What distinguishes an MNC from other internationally active firms is the \textbf{globally coordinated allocation of resources by a single, centralised management}. MNCs emphasise group performance over the performance of individual subsidiaries.
+\end{conceptbox}
+
+MNCs have existed since the 17th century (the British East India Company, the Dutch East India Company, the Hudson Bay Company), but the modern wave of globalisation accelerated after the 1970s and 1980s due to falling regulatory barriers, advances in telecommunications and transport, the end of the communist bloc, and more open capital markets. As of 2022, the worldwide stock of foreign direct investment (FDI) exceeded \$44 trillion.
+
+\subsubsection{Why Firms Internationalise}
+
+The three primary motivations are:
+\begin{enumerate}
+  \item \textbf{Find raw materials.} Not all inputs exist domestically — oil, rare metals, and other commodities require firms to operate where the resources are located.
+  \item \textbf{Find new markets.} Once domestic demand is saturated, MNCs expand overseas to exploit their brand and scale. McDonald's, P\&G, and Coca-Cola earn the majority of revenues internationally.
+  \item \textbf{Reduce costs.} MNCs can exploit lower labour costs, taxes, overhead, and regulatory burdens in foreign countries. Many US manufacturers began establishing production facilities in Mexico during the 1960s for this reason.
+\end{enumerate}
+
+\subsubsection{MNC Risk Exposures}
+
+Three categories of risk are particularly relevant:
+\begin{itemize}
+  \item \textbf{Exchange-rate risk:} future exchange rates are unknown, so the home-currency value of revenues and costs is uncertain.
+  \item \textbf{Regulatory and tax risk:} restrictions on capital mobility, repatriation of profits, and different tax systems across countries.
+  \item \textbf{Political risk:} the risk that a foreign government will interfere with or terminate operations, or that political events (strikes, conflict, expropriation) will affect the business.
+\end{itemize}
+
+\subsection{Exchange Rate Fundamentals}
+
+\subsubsection{What is an Exchange Rate?}
+
+An exchange rate is the price of one nation's currency expressed in units of another. Like any price, exchange rates are determined by supply and demand in the foreign exchange market, where currencies can be bought and sold for immediate (spot) or future (forward) delivery.
+
+\subsubsection{Notation: The Textbook Convention (Critical)}
+
+\begin{conceptbox}{Exchange Rate Notation --- Textbook Convention}
+This course uses the \textbf{textbook (Shapiro) convention}, which differs from the market convention used by Bloomberg and Reuters.
+
+\textbf{Textbook notation:} $A/B$ means the number of units of currency $A$ per one unit of currency $B$.
+\begin{itemize}
+  \item The denominator ($B$) is the \textbf{base currency}.
+  \item The numerator ($A$) is the \textbf{reference (or quote) currency}.
+\end{itemize}
+
+\textbf{Example:} $\text{USD}/\text{EUR} = 1.20$ means $1 \text{ EUR} = \$1.20$ (EUR is the base).
+
+\textbf{Market convention (different):} $A/B$ means units of $B$ per one unit of $A$.
+
+\textit{The course always follows the textbook convention. Do not confuse the two.}
+\end{conceptbox}
+
+The textbook also uses the terms \textit{home currency} (USD, unless stated otherwise) and \textit{foreign currency} (any non-USD currency).
+
+\begin{mistakebox}{Confusing Textbook and Market Notation}
+\textbf{Incorrect approach:} Using the Bloomberg convention where USD/EUR = 0.85 means 0.85 USD per EUR.
+
+\textbf{Correct in this course:} $\text{USD}/\text{EUR} = 1.20$ means $1$ EUR costs \$1.20 (USD is in the numerator; EUR is the base).
+
+\textbf{Prevention rule:} Always check: does the number make intuitive sense? If USD/EUR = 1.20, you expect to pay more than 1 dollar for one euro --- that is sensible.
+\end{mistakebox}
+
+\subsubsection{Computing Prices in Foreign Currencies}
+
+\begin{formulabox}{Converting a Foreign Currency Price}
+\[
+  \text{Price in home currency} = \text{Price in foreign currency} \times e_0
+\]
+where $e_0 = \text{USD}/\text{FC}$ (units of USD per one unit of foreign currency).
+
+\textbf{Example:} A BMW costs \euro{}62{,}500 in Germany and the exchange rate is $\text{USD}/\text{EUR} = 1.20$.
+\[
+  \text{USD cost} = 62{,}500 \times 1.20 = \$75{,}000
+\]
+\end{formulabox}
+
+\subsubsection{Cross Rates}
+
+A \textbf{cross rate} is the exchange rate between two currencies computed using a third currency (usually USD) as the intermediary, because most currencies are quoted against the US dollar rather than directly against each other.
+
+\begin{formulabox}{Cross Rate Calculation (No Bid--Ask Spread)}
+\[
+  \text{Rate}_{A/B} = \frac{\text{Rate}_{A/\$}}{\text{Rate}_{B/\$}}
+\]
+\textbf{Example:} Given $\text{EUR}/\$ = 1.45$ (i.e., \$1 = €1.45, or equivalently $\$/\text{EUR} = 0.6897$) and $\text{EUR}/\text{SFr} = 0.71$ (i.e., SFr1 = €0.71):
+
+To find the SFr/\$ rate: $\text{SFr}/\$ = \text{SFr}/\text{EUR} \times \text{EUR}/\$ = (1/0.71) \times (1/1.45)$. See Tutorial Week 2, Problem 2 for the full worked example.
+\end{formulabox}
+
+\subsection{The Equilibrium Exchange Rate: Supply and Demand}
+
+The exchange rate is the price that equates the supply of and demand for a currency.
+
+\subsubsection{Demand for a Currency}
+
+When US consumers purchase Eurozone goods, they must pay in euros. This creates demand for euros. As the dollar price of the euro rises (the dollar depreciates), US goods become relatively cheaper and US consumers buy fewer Eurozone goods, so the demand curve for euros slopes downward in the usual way.
+
+\subsubsection{Supply of a Currency}
+
+Supply of euros arises from Eurozone demand for US goods. Eurozone consumers must convert euros to dollars to pay for American products. As the euro becomes more valuable, Eurozone residents can buy more US goods, increasing their demand for dollars and the supply of euros.
+
+\subsubsection{Equilibrium}
+
+The equilibrium exchange rate $e_0$ is where supply equals demand. It represents the rate at which the purchasing power of the two currencies is equalised for traded goods.
+
+\subsection{Factors that Affect Exchange Rates}
+
+\begin{center}
+\begin{tabular}{lp{6.5cm}l}
+\toprule
+\textbf{Factor} & \textbf{Mechanism} & \textbf{Effect on USD} \\
+\midrule
+US inflation rises & US goods become more expensive; US demand for foreign goods rises (demand for FC rises); foreigners buy fewer US goods (supply of FC falls). & USD depreciates \\
+\addlinespace
+US real growth rises & Demand for imports rises, increasing demand for foreign currencies. & USD depreciates \\
+\addlinespace
+US interest rates rise & Capital inflows from abroad increase, increasing demand for USD. & USD appreciates \\
+\addlinespace
+US political/economic risk rises & Investors move capital abroad; demand for USD falls. & USD depreciates \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Real Exchange Rates and Central Bank Intervention}
+
+\subsubsection{Appreciation vs.\ Depreciation: Mixed Effects}
+
+A strong home currency (appreciation) benefits consumers through cheaper imports but harms exporters because US goods become expensive for foreign buyers. A weak home currency has the reverse effects. Central banks sometimes attempt to manage these trade-offs through currency intervention.
+
+\subsubsection{Sterilised vs.\ Unsterilised Intervention}
+
+When a central bank intervenes in the FX market by buying or selling its currency, it changes the domestic money supply. This side-effect can be neutralised:
+
+\begin{itemize}
+  \item \textbf{Unsterilised intervention:} The central bank allows the money supply change to stand. The resulting inflation or deflation ultimately moves the exchange rate, but the effect is permanent.
+  \item \textbf{Sterilised intervention:} The central bank offsets the money supply change through open-market operations (buying or selling government securities). The exchange-rate effect is typically temporary and often ineffective in the long run, because it does not change the underlying fundamentals.
+\end{itemize}
+
+\subsubsection{Percentage Change in Exchange Rate}
+
+\begin{formulabox}{Percentage Change in an Exchange Rate}
+\[
+  \%\Delta e = \frac{e_1 - e_0}{e_0} \times 100
+\]
+If $\%\Delta e > 0$: home currency has \textbf{depreciated} (foreign currency costs more home currency).
+
+If $\%\Delta e < 0$: home currency has \textbf{appreciated}.
+
+\textbf{Example (Tutorial):} The Italian lira depreciated by 17\% against the dollar. The appreciation of the dollar against the lira is:
+\[
+  \frac{e_1 - e_0}{e_1} \approx \frac{0.17}{0.83} \approx 20.48\%
+\]
+Note: when the lira falls 17\%, the dollar rises by more than 17\% (here, approximately 20.5\%), because the denominator has changed. This is a frequent source of error.
+\end{formulabox}
+
+\begin{mistakebox}{Symmetric Depreciation/Appreciation Error}
+\textbf{Incorrect:} If currency A depreciates by 17\%, currency B appreciates by 17\%.
+
+\textbf{Correct:} If A depreciates by 17\% against B, then B appreciates by $17/83 \approx 20.5\%$ against A.
+
+\textbf{Rule:} Use the formula with the correct denominator, not simple arithmetic.
+\end{mistakebox}
+
+\subsection{End-of-Week 1 Summary}
+
+\subsubsection*{Key Takeaways}
+\begin{enumerate}
+  \item MNCs are distinguished by globally coordinated resource allocation; their main motivations are raw materials, new markets, and cost reduction.
+  \item The textbook notation $A/B$ means units of $A$ per one unit of $B$ (denominator is the base currency). This course always uses this convention.
+  \item The equilibrium exchange rate equates supply and demand for currencies, driven by relative trade flows.
+  \item Higher inflation, higher growth, lower interest rates, and higher political risk all tend to depreciate the home currency.
+  \item Sterilised intervention is generally ineffective in the long run; unsterilised intervention can have permanent effects but at the cost of changing the money supply and inflation.
+  \item Percentage depreciation of one currency does not equal percentage appreciation of the other; use the correct formula.
+\end{enumerate}
+
+\subsubsection*{Weekly Revision Checklist}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] I can define an MNC and explain the three main reasons for internationalisation.
+  \item[\cb] I understand the textbook notation convention and can convert a price correctly.
+  \item[\cb] I can draw and explain the supply-and-demand diagram for exchange rates.
+  \item[\cb] I can explain how inflation, interest rates, growth, and political risk affect the exchange rate.
+  \item[\cb] I can distinguish sterilised from unsterilised intervention.
+  \item[\cb] I can calculate percentage depreciation/appreciation correctly.
+\end{itemize}
+
+\subsubsection*{Sources Used for Week 1}
+\textit{Lecture material:} PPT Slides of Chapter 1; PPT Slides for Chapter 2; FINS3616 Lecture A M-transcript W1 A; FINS3616 Lecture B T-transcript W1 B. \textit{Tutorial material:} Week 1 final Tutorial Solutions; Questions only for Week 1 final Tutorial Solutions (Updated). \textit{Testbank material:} ch01 revised testbank; ch02 revised testbank.
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Week 2 — The Foreign Exchange Market and Purchasing Power Parity}
+
+\subsection{Weekly Overview}
+
+Week 2 covers two closely related topics. Chapter 6 provides a detailed account of how the foreign exchange market is actually organised and how spot and forward transactions are conducted. Chapter 4 (Part 1) introduces the first two of the five major parity conditions — absolute and relative purchasing power parity (PPP) — which underpin the rest of the course.
+
+Understanding the FX market mechanics is practical: students must be able to determine whether to use a bid or an ask rate, compute cross rates with bid-ask spreads, detect triangular arbitrage, and use forward contracts to hedge FX exposure. Understanding PPP is theoretical but also quantitative: the relative PPP formula is directly tested in tutorial calculations.
+
+\subsection{Learning Outcomes}
+
+After studying Week 2, students should be able to:
+\begin{itemize}
+  \item Describe the structure and participants of the FX market.
+  \item Define bid price, ask price, and percentage bid-ask spread.
+  \item Calculate a spot transaction using the correct bid or ask rate.
+  \item Calculate outright forward rates from swap points.
+  \item Compute forward premiums and discounts.
+  \item Compute cross rates with and without bid-ask spreads.
+  \item Identify and calculate triangular currency arbitrage.
+  \item State and apply absolute PPP to find an implied exchange rate.
+  \item State and apply relative PPP to forecast future exchange rates.
+  \item Calculate the real value of a currency using the relative PPP formula.
+  \item Explain why absolute PPP fails in practice and when relative PPP holds.
+\end{itemize}
+
+\subsection{The Foreign Exchange Market}
+
+\subsubsection{Market Structure and Participants}
+
+The FX market is the largest financial market in the world, with daily turnover approximately 30 times global GDP. The market operates 24 hours a day across global trading centres, with London accounting for over one-third of all trading volume. The market is organised in tiers:
+
+\begin{itemize}
+  \item \textbf{Interbank (wholesale) market:} dominated by about 20 major banks that communicate through the SWIFT network.
+  \item \textbf{FX brokers:} intermediaries who, for a small fee, match one bank's order with another.
+  \item \textbf{Retail customers:} corporations, fund managers, and individuals who transact through their local or corporate banks.
+\end{itemize}
+
+Despite the vast size of the market, 95\% of all FX transactions are \textit{not} related to trade in goods and services — they relate to cross-border purchases and sales of financial assets (international capital flows).
+
+\subsubsection{Spot Quotes: American and European Terms}
+
+Spot quotes give the price of a currency for immediate delivery. Quotes can be expressed in two ways:
+\begin{itemize}
+  \item \textbf{American terms:} USD per one unit of the foreign currency (direct quote in the US).
+  \item \textbf{European terms:} foreign currency per one USD (indirect quote in the US).
+\end{itemize}
+
+Example (from the textbook, August 2020): EUR: American terms $= 1.1815$, meaning $1 \text{ EUR} = \$1.1815$.
+
+\paragraph{Pips.}
+The last digit of a quote is called a pip (point in percentage):
+\begin{itemize}
+  \item For currencies quoted to 4 decimal places (e.g., EUR, GBP), a pip $= 0.0001$.
+  \item For currencies quoted to 2 decimal places (e.g., JPY, KRW), a pip $= 0.01$.
+\end{itemize}
+
+\subsubsection{Bid and Ask Prices}
+
+Dealers quote two prices:
+\begin{itemize}
+  \item \textbf{Bid price:} the price at which the dealer buys the base currency (and the counterparty sells it).
+  \item \textbf{Ask (offer) price:} the price at which the dealer sells the base currency (and the counterparty buys it).
+\end{itemize}
+
+The ask price is always higher than the bid price. The difference is the dealer's profit margin.
+
+\begin{formulabox}{Percentage Bid-Ask Spread}
+\[
+  \text{Percentage spread} = \frac{\text{Ask} - \text{Bid}}{\text{Ask}} \times 100
+\]
+\textbf{Example (Tutorial):} GBP is quoted at \$1.3183--88.\\
+$\text{Spread} = (1.3188 - 1.3183)/1.3188 \times 100 = 0.038\%$
+
+\textbf{Rule:} From the counterparty's perspective --- if you are \textbf{selling} a currency, you receive the \textbf{bid} price. If you are \textbf{buying} a currency, you pay the \textbf{ask} price.
+\end{formulabox}
+
+\begin{mistakebox}{Which Rate to Use --- Bid or Ask?}
+\textbf{Incorrect:} Always using the same (e.g., mid) rate for all transactions.
+
+\textbf{Correct:}
+\begin{itemize}
+  \item Selling foreign currency to the bank $\Rightarrow$ you receive the \textbf{bid} (lower) rate.
+  \item Buying foreign currency from the bank $\Rightarrow$ you pay the \textbf{ask} (higher) rate.
+\end{itemize}
+
+\textbf{Memory rule:} "The bank always wins" --- you always get the worse price.
+\end{mistakebox}
+
+\subsubsection{Cross Rates with Bid-Ask Spreads (Tutorial Method)}
+
+When two non-USD currencies are not quoted directly, we compute the cross rate via USD.
+
+\begin{methodbox}{Computing Cross Rates with Bid-Ask Spreads}
+\textbf{Given:} Bid/ask rates for currencies A and B against USD.
+
+\textbf{Bid cross rate (buying currency B with currency A):}
+\[
+  \text{Bid}_{B/A} = \frac{\text{Bid}_{B/\$}}{\text{Ask}_{A/\$}}
+\]
+
+\textbf{Ask cross rate (selling currency B for currency A):}
+\[
+  \text{Ask}_{B/A} = \frac{\text{Ask}_{B/\$}}{\text{Bid}_{A/\$}}
+\]
+
+\textbf{Intuition:} To buy Thai bahts with Brazilian reais, you first sell reais for dollars (you pay the ask rate for reais), then use dollars to buy bahts (you receive the bid rate for bahts).
+\end{methodbox}
+
+\paragraph{Worked Example (Tutorial Week 2, Chapter 6 Problem 8d).}
+Dupont wants to sell NT\$200 million and receive Japanese yen. Quotes: yen $= \$0.009369$--$71$; NT\$ $= \$0.03675$--$6$.
+
+\textbf{Step 1:} Sell NT\$ at the bid rate for NT\$ (= receive USD): $200{,}000{,}000 \times 0.03675 = \$7{,}350{,}000$.
+
+\textbf{Step 2:} Use USD to buy yen at the ask rate for yen: $7{,}350{,}000 / 0.009371 = ¥784{,}334{,}649$.
+
+\textbf{Note:} Selling NT\$ for USD means you sell at the NT\$ bid; then buying yen with USD means you pay the yen ask rate.
+
+\subsubsection{Triangular Currency Arbitrage}
+
+Triangular arbitrage exploits inconsistencies across three currency pairs to generate a riskless profit.
+
+\paragraph{Worked Example (Tutorial Week 2, Chapter 6 Problem 9).}
+GBP/EUR in London $= 0.6064$--$0.6080$; EUR/GBP in Frankfurt $= 1.6244$--$1.6259$.
+
+\textbf{Step 1:} Convert the London quote to EUR/GBP: $1/0.6080$--$1/0.6064 = 1.6447$--$1.6491$.
+
+\textbf{Step 2:} Compare with Frankfurt: Frankfurt asks 1.6259 for GBP; you can sell GBP in London for 1.6447.
+
+\textbf{Arbitrage:} Buy GBP in Frankfurt at 1.6259 EUR per GBP; sell in London at 1.6447 EUR per GBP.
+
+\textbf{Profit per GBP:} $1.6447 - 1.6259 = 0.0188$ EUR, or $0.0188/1.6259 = 1.16\%$.
+
+\subsection{The Forward Market}
+
+\subsubsection{Forward Contracts: Definition and Purpose}
+
+A \textbf{forward contract} is a private agreement between two parties (typically a bank and a corporate client) to exchange a specified amount of currency at a pre-agreed price on a future date. Standard maturities are 30, 60, 90, 180, and 360 days, but custom maturities are available.
+
+Forward contracts are used by MNCs to \textbf{hedge} known future currency exposures. If a US company must pay £1 million in 90 days, it can lock in today's forward rate and eliminate the uncertainty of what the pound will cost at delivery.
+
+\subsubsection{Outright Forward Rates from Swap Points}
+
+Forward rates are often quoted as \textbf{swap rates} (the difference between the forward rate and the spot rate in pips) rather than as outright prices. To find the outright forward rate:
+
+\begin{formulabox}{Computing Outright Forward Rate from Swap Points}
+\[
+  \text{Outright forward rate} = \text{Spot rate} + \text{Swap points} \times 0.0001
+\]
+(or $\times 0.01$ for 2-decimal-place currencies)
+
+\textbf{Example (Tutorial Week 2, Problem 7):} Spot and 90-day swap quotes on CHF: \$0.7957--60, 8--13.
+\begin{itemize}
+  \item Outright 90-day bid $= 0.7957 + 0.0008 = \$0.7965$
+  \item Outright 90-day ask $= 0.7960 + 0.0013 = \$0.7973$
+\end{itemize}
+\end{formulabox}
+
+\subsubsection{Forward Premium and Discount}
+
+\begin{formulabox}{Annualised Forward Premium (+) or Discount ($-$)}
+\[
+  \text{Forward premium/discount} = \frac{F - S_0}{S_0} \times \frac{360}{\text{days}} \times 100
+\]
+where $F$ is the outright forward ask price (or mid-price) and $S_0$ is the spot ask price.
+
+A positive result indicates the foreign currency trades at a \textbf{forward premium} (the market expects it to appreciate).
+
+\textbf{Example (Problem 7):} $\frac{0.7973 - 0.7960}{0.7960} \times 4 = 0.65\%$ annualised premium.
+\end{formulabox}
+
+\subsubsection{Hedging with Forward Contracts: Three Key Points}
+
+The textbook identifies three principles that apply to all forward-contract hedges:
+\begin{enumerate}
+  \item \textbf{Gain or loss on the forward is unrelated to the current spot rate.} The hedge is set at the forward price, not the spot rate.
+  \item \textbf{The forward contract gain or loss exactly offsets the change in the spot cost.} This is the purpose of hedging.
+  \item \textbf{The bank must deliver, and the company must buy at the agreed price.} Neither party can walk away.
+\end{enumerate}
+
+\subsection{Purchasing Power Parity}
+
+Parity conditions are relationships based on the Law of One Price that are ideally enforced by arbitrage. PPP is the first and most intuitive parity condition.
+
+\begin{conceptbox}{The Law of One Price}
+In competitive markets free of transport costs, tariffs, and other trade barriers, the price of an identical good must be the same in all countries when expressed in a common currency. If it is not, arbitrageurs will buy the good where it is cheap and sell it where it is expensive until prices equalise.
+\end{conceptbox}
+
+\subsubsection{Absolute PPP}
+
+Absolute PPP applies the Law of One Price at the aggregate price level. It states that the exchange rate between two currencies equals the ratio of their price levels.
+
+\begin{formulabox}{Absolute PPP}
+\[
+  P_h = e_0 \cdot P_f \qquad \Longrightarrow \qquad e_0 = \frac{P_h}{P_f}
+\]
+where $P_h$ is the price level in the home country, $P_f$ is the price level in the foreign country, and $e_0$ is the spot exchange rate (home currency per one unit of foreign currency).
+
+\textbf{Example (Jeep):} A Jeep costs \$35{,}000 in the US and £25{,}000 in the UK. PPP-implied rate: $35{,}000/25{,}000 = \$1.40/\text{£}$. If the actual rate is \$1.60/£, the pound is overvalued.
+\end{formulabox}
+
+\paragraph{Why Absolute PPP Does Not Hold in Practice.}
+\begin{itemize}
+  \item Tariffs, transport costs, and trade barriers prevent arbitrage across all goods.
+  \item Price indices in different countries use different goods and different weights.
+  \item Many goods are non-traded (haircuts, restaurant meals) and cannot be arbitraged across borders.
+  \item Government intervention can sustain disequilibrium exchange rates.
+\end{itemize}
+
+\subsubsection{Relative PPP}
+
+Relative PPP is more useful and more empirically supported. It asks not what the exchange rate \textit{should be}, but by how much it \textit{should change} in response to differential inflation rates.
+
+\begin{formulabox}{Relative PPP --- Exact Version}
+\[
+  e_t = e_0 \times \left(\frac{1 + i_h}{1 + i_f}\right)^t
+\]
+where:
+\begin{itemize}
+  \item $e_t$ = expected spot rate at time $t$ (home currency per one unit of foreign currency)
+  \item $e_0$ = current spot rate
+  \item $i_h$ = home country (annual) inflation rate
+  \item $i_f$ = foreign country (annual) inflation rate
+  \item $t$ = number of years
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}{Relative PPP --- Intuitive Approximation}
+\[
+  \frac{e_t - e_0}{e_0} \approx i_h - i_f
+\]
+The percentage change in the exchange rate approximately equals the inflation differential. If home inflation exceeds foreign inflation by 4\%, the home currency will depreciate by approximately 4\%.
+\end{formulabox}
+
+\paragraph{Worked Example 1 (Tutorial Week 2, Problem 7).}
+
+US inflation is expected to be 10\% per year; German inflation 4\% per year; current rate $e_0 = \$0.95/\text{€}$.
+
+What will the exchange rates be for Years 1--5?
+
+\[
+  e_t = 0.95 \times \left(\frac{1.10}{1.04}\right)^t
+\]
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Year $t$ & $e_t$ (\$/€) \\
+\midrule
+1 & $0.95 \times (1.10/1.04)^1 = \$1.0048$ \\
+2 & $\$1.0628$ \\
+3 & $\$1.1241$ \\
+4 & $\$1.1889$ \\
+5 & $\$1.2575$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The dollar depreciates against the euro each year because US inflation is higher.
+
+\paragraph{Worked Example 2 --- Real Exchange Rate (Tutorial Week 2, Problem 7b).}
+
+US inflation averaged 3.2\%; German inflation 1.5\%; actual rate in 5 years $= \$0.99/\text{€}$.
+
+The \textbf{real} (PPP-adjusted) value of the euro after 5 years:
+\[
+  e_t^{\text{real}} = e_t^{\text{nominal}} \times \left(\frac{1 + i_f}{1 + i_h}\right)^t = 0.99 \times \left(\frac{1.015}{1.032}\right)^5 = \$0.9111
+\]
+
+The euro has fallen in \textit{real} terms by $(0.9111 - 0.95)/0.95 = -4.09\%$, even though it appreciated in nominal terms. This means the euro became cheaper than PPP predicts --- it is undervalued in real terms.
+
+\paragraph{Worked Example 3 --- Mexico Peso (Tutorial Week 2, Problem 8).}
+
+In 1995, the peso exchange rate rose from Mex5.33/USD to Mex7.64/USD. US inflation was 3\%; Mexican inflation was 48.7\%.
+
+\textbf{(a) Nominal change:} Convert to USD/Mex: spot fell from \$0.1876 to \$0.1309 per peso.
+\[
+  \%\Delta = \frac{0.1309 - 0.1876}{0.1876} = -30.24\%
+\]
+The peso fell by 30.24\% in nominal terms.
+
+\textbf{(b) Real change:} The real value of the peso at year end:
+\[
+  e_1^{\text{real}} = 0.1309 \times \frac{1.487}{1.03} = \$0.1890
+\]
+Since $0.1890 \approx 0.1876$, the real value is virtually unchanged. PPP held in Mexico in 1995 --- the massive nominal depreciation simply offset the massive inflation differential.
+
+\subsubsection{Empirical Evidence on PPP}
+
+\begin{itemize}
+  \item \textbf{Absolute PPP} does not hold --- price levels differ substantially across countries due to non-traded goods, tariffs, and market imperfections.
+  \item \textbf{Relative PPP} does \textit{not} hold in the short run (exchange rates move faster than prices of goods, which are sticky), but \textit{does} hold in the long run. The Big Mac Index (The Economist) provides an accessible illustration of absolute PPP deviations.
+\end{itemize}
+
+\begin{tipbox}
+Relative PPP holds best: (a) over long periods among countries with moderate inflation differentials, and (b) in the short run during hyperinflation, when price changes dwarf relative price effects. These are the two exam-relevant circumstances cited in the tutorial solutions.
+\end{tipbox}
+
+\subsection{End-of-Week 2 Summary}
+
+\subsubsection*{Key Takeaways}
+\begin{enumerate}
+  \item In the FX market, always use the bid when selling and the ask when buying (from the dealer's perspective, you always receive the worse rate).
+  \item Outright forward rates $=$ spot rate $+$ swap points (in pips).
+  \item A positive forward premium/discount formula gives an annualised rate; multiply by $360/\text{days}$.
+  \item Absolute PPP: $e_0 = P_h / P_f$; does not hold in practice due to trade barriers and non-traded goods.
+  \item Relative PPP (exact): $e_t = e_0 \times (1+i_h)^t/(1+i_f)^t$; approximation: $\Delta\% e \approx i_h - i_f$.
+  \item The real exchange rate adjusts the nominal rate for inflation; if the real rate is unchanged, PPP holds.
+\end{enumerate}
+
+\subsubsection*{Formula Summary}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Formula} & \textbf{Equation} & \textbf{Use} \\
+\midrule
+Bid-ask spread & $(Ask - Bid)/Ask \times 100$ & Measure dealer margin \\
+Forward premium & $(F - S_0)/S_0 \times 360/\text{days}$ & Annualise forward rate differential \\
+Absolute PPP & $e_0 = P_h/P_f$ & Implied spot rate \\
+Relative PPP (exact) & $e_t = e_0 \times (1+i_h)^t/(1+i_f)^t$ & Forecast future spot rate \\
+Relative PPP (approx) & $\Delta\% e \approx i_h - i_f$ & Quick approximation \\
+Real exchange rate & $e_t^{\text{real}} = e_t^{\text{nom}} \times (1+i_f)^t/(1+i_h)^t$ & Test if PPP held \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection*{Weekly Revision Checklist}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] I can identify bid vs.\ ask rates and use the correct one for each transaction.
+  \item[\cb] I can compute outright forward rates from swap points.
+  \item[\cb] I can compute forward premiums and discounts (annualised).
+  \item[\cb] I can compute cross rates with and without bid-ask spreads.
+  \item[\cb] I can identify a triangular arbitrage opportunity and compute the profit.
+  \item[\cb] I can apply both versions of absolute and relative PPP.
+  \item[\cb] I can compute the real exchange rate and interpret whether PPP held.
+\end{itemize}
+
+\subsubsection*{Sources Used for Week 2}
+\textit{Lecture material:} chapter4\_mfm\_slides2026 (Edit)[1] Read-Only; chapter6\_mfm\_slides2026 (Edit)[3] Read-Only; FINS3616 Lecture B T-transcript W2 B. \textit{Tutorial material:} Tutorial Questions for Week 2; Tutorial questions and their solutions for Week 2. \textit{Supplementary material:} Week 2 Ch 4-extra proofs and comments-Part 1; Week 2 Ch 6-extra proofs and comments-revised version.
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Week 3 — Fisher Effects, Interest Rate Parity, and Currency Forecasting}
+
+\subsection{Weekly Overview}
+
+Week 3 completes the parity conditions framework by adding three more relationships: the Fisher effect (FE), the International Fisher effect (IFE), and interest rate parity (IRP). Together with PPP from Week 2, these five conditions (PPP, FE, IFE, IRP, UFR) form the core of international parity theory and are collectively called the parity wheel.
+
+Each condition links a pair of variables: PPP links inflation to exchange rates; the Fisher effect links inflation to nominal interest rates; the IFE combines PPP and FE to link interest rates to expected future exchange rates; and IRP links interest rates to forward exchange rates. When all conditions hold simultaneously, the framework is internally consistent. In practice, none holds perfectly in the short run --- but IRP holds most closely because it is enforced by covered arbitrage.
+
+Tutorial Week 3 emphasises calculation-heavy questions: applying the Fisher effect formula, using IFE to forecast future spot rates, identifying covered interest arbitrage opportunities, and computing forward premiums from interest differentials.
+
+\subsection{Learning Outcomes}
+
+After studying Week 3, students should be able to:
+\begin{itemize}
+  \item Apply the Fisher effect formula to calculate nominal interest rates.
+  \item Explain and apply the Generalised Fisher effect.
+  \item Apply the IFE to forecast future spot rates from interest differentials.
+  \item Define and calculate interest rate parity (IRP).
+  \item Identify covered interest arbitrage opportunities.
+  \item Explain the relationship between the IFE, IRP, and the forward rate.
+  \item Explain what unbiased forward rates (UFR) means and whether the evidence supports it.
+  \item Describe the main approaches to currency forecasting.
+\end{itemize}
+
+\subsection{The Fisher Effect}
+
+\subsubsection{Definition and Intuition}
+
+The Fisher effect states that the nominal interest rate on a financial asset equals the sum of the required real return and the expected inflation premium. Investors demand compensation not only for the real return they require (to defer consumption) but also for the erosion of purchasing power caused by inflation.
+
+\begin{formulabox}{The Fisher Effect --- Exact Version}
+\[
+  (1 + r) = (1 + a)(1 + i)
+\]
+where:
+\begin{itemize}
+  \item $r$ = nominal interest rate (the observed rate)
+  \item $a$ = real interest rate (real purchasing power gained)
+  \item $i$ = expected inflation rate
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}{The Fisher Effect --- Approximation}
+\[
+  r \approx a + i
+\]
+This approximation is sufficiently accurate when $a$ and $i$ are small (single-digit percentages).
+\end{formulabox}
+
+\paragraph{Worked Example (Tutorial Week 3, Problem 3).}
+
+If expected inflation is 100\% and the real required return is 5\%, what is the nominal interest rate?
+\[
+  1 + r = (1 + 0.05)(1 + 1.00) = 1.05 \times 2.00 = 2.10 \qquad \Rightarrow \qquad r = 110\%
+\]
+
+Note: the approximation would give $r \approx 5\% + 100\% = 105\%$, which is too low at high inflation. Always use the exact formula when inflation is large.
+
+\paragraph{Worked Example --- Savings Account.}
+
+You earn 6\% per year in a savings account and inflation is 2\%.
+
+\textbf{Nominal return:} $r = 6\%$.
+
+\textbf{Real return:} $1 + a = (1 + r)/(1 + i) = 1.06/1.02 = 1.0392$, so $a = 3.92\%$.
+
+Interpretation: your wealth increases by \$60 in nominal terms, but your actual purchasing power increases by only \$39.20.
+
+\subsubsection{The Generalised (International) Fisher Effect}
+
+In a world of free capital flows, real interest rates will equalise across countries. If real rates were higher in one country, capital would flow exclusively to it until the higher real returns were arbitraged away. Therefore:
+
+\[
+  a_h = a_f \qquad \Longrightarrow \qquad \frac{1 + r_h}{1 + i_h} = \frac{1 + r_f}{1 + i_f} \qquad \Longrightarrow \qquad \frac{1 + r_h}{1 + r_f} = \frac{1 + i_h}{1 + i_f}
+\]
+
+In words: the \textbf{nominal interest rate differential equals the expected inflation differential}. Countries with higher expected inflation will have higher nominal interest rates.
+
+\begin{tipbox}
+The Generalised Fisher effect is the bridge between PPP and the IFE. PPP says inflation differentials explain exchange rate changes. The GFE says inflation differentials equal interest rate differentials. The IFE therefore says interest rate differentials predict exchange rate changes.
+\end{tipbox}
+
+\subsection{The International Fisher Effect (IFE)}
+
+The IFE combines PPP with the Generalised Fisher effect. If real interest rates are equal across countries, then the nominal interest differential equals the inflation differential (by GFE), which equals the expected exchange rate change (by PPP).
+
+\begin{formulabox}{The International Fisher Effect --- Exact Version}
+\[
+  e_t = e_0 \times \left(\frac{1 + r_h}{1 + r_f}\right)^t
+\]
+where $r_h$ is the home nominal interest rate and $r_f$ is the foreign nominal interest rate.
+
+\textbf{Use when:} You want to forecast the future spot rate from interest rate differentials, assuming real rates are equal internationally.
+\end{formulabox}
+
+\begin{formulabox}{IFE --- Approximation}
+\[
+  \frac{e_t - e_0}{e_0} \approx r_h - r_f
+\]
+The home currency is expected to depreciate by approximately the amount by which the home interest rate exceeds the foreign interest rate.
+\end{formulabox}
+
+\paragraph{Worked Example (Tutorial Week 3, Problem 5a).}
+
+UK 1-year interest rate $= 12\%$; US 1-year rate $= 9\%$; current spot $= \$1.63/\text{GBP}$.
+
+Expected spot rate in 1 year (from the IFE, home $=$ US):
+\[
+  e_1 = 1.63 \times \frac{1 + 0.09}{1 + 0.12} = 1.63 \times \frac{1.09}{1.12} = \$1.5863/\text{GBP}
+\]
+
+The dollar is expected to appreciate (or the pound to depreciate) because the UK has a higher nominal interest rate, reflecting higher expected inflation.
+
+\paragraph{Worked Example (Problem 5b).}
+
+Suppose a change in expectations causes the expected future spot rate to fall to \$1.52/GBP. What must happen to the US interest rate?
+
+Setting $e_1 / e_0 = (1 + r_{US})/(1 + r_{UK})$:
+\[
+  \frac{1.52}{1.63} = \frac{1 + r_{US}}{1.12} \qquad \Rightarrow \qquad r_{US} = 1.12 \times \frac{1.52}{1.63} - 1 = 4.44\%
+\]
+
+The expectation of a stronger USD (lower future \$/£) corresponds to lower US interest rates. This is consistent with the Fisher effect: lower expected US inflation $\Rightarrow$ lower US nominal rates.
+
+\subsubsection{Interpretation of the IFE (Tutorial Question 10)}
+
+Tutorial Week 3 Question 10 (corresponding to textbook Question 11) asks about Japan and Germany in 1990: interest rates rose while their currencies fell against the USD. The IFE explains this: rising Japanese and German interest rates reflected rising expected inflation in those countries (Fisher effect). PPP predicted the yen and DM would depreciate (higher inflation means weaker currency). Markets immediately incorporated this into currency values, causing the yen and DM to fall.
+
+\subsection{Interest Rate Parity (IRP)}
+
+Interest rate parity is the most precisely enforced of all the parity conditions because it can be locked in through \textbf{covered} transactions that eliminate currency risk.
+
+\begin{conceptbox}{Interest Rate Parity}
+IRP states that the forward premium or discount on a currency must equal the interest rate differential between the two countries. If this relationship is violated, riskless arbitrage profits are available, and market participants will exploit them until parity is restored.
+
+\[
+  f_t = e_0 \times \left(\frac{1 + r_h}{1 + r_f}\right)^t
+\]
+
+where $f_t$ is the $t$-period forward exchange rate (home currency per one unit of foreign currency).
+\end{conceptbox}
+
+\begin{formulabox}{IRP --- No-Arbitrage Condition}
+\[
+  \frac{f_t}{e_0} = \frac{1 + r_h}{1 + r_f}
+\]
+\textbf{Equivalently (approximation):}
+\[
+  \frac{f_t - e_0}{e_0} \approx r_h - r_f
+\]
+The forward premium approximately equals the interest rate differential.
+\end{formulabox}
+
+\subsubsection{IRP vs.\ IFE}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & \textbf{IFE} & \textbf{IRP} \\
+\midrule
+Equation & $e_t = e_0 \times (1+r_h)^t/(1+r_f)^t$ & $f_t = e_0 \times (1+r_h)^t/(1+r_f)^t$ \\
+Left-hand side & \textit{expected future} spot rate $e_t$ & current \textit{forward} rate $f_t$ \\
+Risk & Risky (spot rate may differ) & Riskless (forward rate is locked in) \\
+Enforcement & Holds on average (imprecise) & Held tightly by covered arbitrage \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Both formulas have the same right-hand side. Therefore, if both hold simultaneously, $f_t = e_t$, which is the Unbiased Forward Rate hypothesis (UFR).
+
+\subsubsection{Covered Interest Arbitrage: Example}
+
+\begin{methodbox}{Detecting and Executing Covered Interest Arbitrage}
+\textbf{Step 1:} Check whether IRP holds: does $f_t = e_0 \times (1+r_h)/(1+r_f)$?
+
+\textbf{Step 2:} If $f_t > e_0 \times (1+r_h)/(1+r_f)$: the forward rate is too high. Borrow home, buy foreign, invest abroad, sell forward.
+
+\textbf{Step 3:} If $f_t < e_0 \times (1+r_h)/(1+r_f)$: the forward rate is too low. Borrow foreign, buy home, invest domestically, sell foreign forward.
+
+\textbf{Profit} = return from the high-rate side minus cost of the low-rate side.
+\end{methodbox}
+
+\paragraph{Worked Example (Tutorial Week 3, Problem 14a).}
+
+Spot rate $= \$1.46/\text{€}$; 1-year forward $= \$1.49/\text{€}$; EUR interest rate $= 7\%$; USD rate $= 9\%$.
+
+\textbf{Check IRP:} The IRP forward rate is $1.46 \times (1.09/1.07) = 1.4873$. But the actual forward is 1.49, which is higher.
+
+\textbf{Arbitrage:} Borrow USD, convert to EUR at spot, invest at 7\%, sell EUR forward at 1.49.
+
+\textbf{Dollar return from European investment:}
+\[
+  \frac{1.07 \times 1.49}{1.46} - 1 = \frac{1.5943}{1.46} - 1 = 9.20\%
+\]
+
+This exceeds the 9\% USD borrowing cost by 0.20\%, confirming an arbitrage profit.
+
+\paragraph{With Transaction Costs (Problem 14b).}
+
+With a 0.25\% transaction cost \textit{per transaction}:
+\[
+  1.07 \times 1.49 / 1.46 \times (1 - 0.0025)^2 - 1.09 = -0.35\%
+\]
+
+The arbitrage becomes unprofitable. Transaction costs of only 0.25\% per leg eliminate the 0.20\% profit.
+
+\begin{tipbox}
+Transaction costs eliminate most covered interest arbitrage. The profit must exceed round-trip transaction costs (typically 0.25--0.50\% per leg) before it is worth pursuing.
+\end{tipbox}
+
+\paragraph{Worked Example (Tutorial Week 3, Problem 15).}
+
+Spot $= \$1.55/\text{€}$; 6-month interest rates: USD $= 6\%$ p.a. (3\% per 6 months), EUR $= 3\%$ p.a. (1.5\% per 6 months); 6-month forward $= \$1.5478/\text{€}$; advisory firm predicts spot in 6 months $= \$1.5790/\text{€}$.
+
+\textbf{(a) Forward market speculation:} Buy EUR forward at 1.5478; sell at expected spot of 1.5790.
+\[
+  \text{Expected profit per EUR} = 1.5790 - 1.5478 = \$0.0312
+\]
+\[
+  \text{Semiannual return} = 0.0312 / 1.5478 = 2.02\%
+\]
+
+\textbf{(b) Money market speculation:} Borrow USD at 3\%; convert to EUR; invest at 1.5\%; sell EUR at expected spot.
+\[
+  \text{Return} = (1/1.55) \times 1.015 \times 1.5790 - 1.03 = 0.004 = 0.4\%
+\]
+
+\textbf{(c) Comparison:} The forward market strategy (2.02\% semiannual) far exceeds the money market strategy (0.04\%). The forward market is preferred because it does not require the up-front borrowing and conversion of funds.
+
+\subsection{Unbiased Forward Rates (UFR)}
+
+\begin{conceptbox}{Unbiased Forward Rate Hypothesis}
+UFR combines IRP and IFE: if both hold, then $f_t = e_t$, i.e., the forward rate is an unbiased predictor of the future spot rate.
+
+In practice, evidence suggests $f_t = e_t + \text{RP}$, where RP is a risk premium that can be positive or negative. The forward rate is therefore \textit{not} perfectly unbiased --- it incorporates a risk premium that traders demand for taking on exchange-rate risk.
+\end{conceptbox}
+
+\subsection{Currency Forecasting}
+
+The lecture identifies four requirements for successful currency forecasting:
+\begin{enumerate}
+  \item A \textbf{superior forecasting model} that outperforms the market.
+  \item \textbf{Exclusive early access to information} before it is reflected in prices.
+  \item The ability to \textbf{exploit small, temporary deviations} from fair value.
+  \item The ability to \textbf{predict government interventions} (especially in fixed-rate systems).
+\end{enumerate}
+
+In practice, substantial evidence suggests that exchange rate changes are largely unpredictable in the short run, and that the current spot rate or the forward rate is as good a predictor as most econometric models.
+
+\subsection{End-of-Week 3 Summary}
+
+\subsubsection*{Key Takeaways}
+\begin{enumerate}
+  \item Fisher effect: $(1+r) = (1+a)(1+i)$. Countries with higher expected inflation have higher nominal rates.
+  \item Generalised Fisher effect: real rates equalise internationally, so the nominal rate differential $\approx$ inflation differential.
+  \item IFE: the home currency is expected to depreciate by the amount of the home-minus-foreign interest rate differential.
+  \item IRP: the forward rate differs from the spot rate by the interest rate differential. Violations create covered arbitrage.
+  \item IRP is more tightly enforced than IFE because covered arbitrage is riskless.
+  \item Forward premiums should equal interest rate differentials; if not, arbitrage is possible.
+  \item UFR: the forward rate is not perfectly unbiased --- it includes a risk premium.
+\end{enumerate}
+
+\subsubsection*{Formula Summary}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Formula} & \textbf{Equation} & \textbf{Key Assumption} \\
+\midrule
+Fisher effect & $(1+r) = (1+a)(1+i)$ & Nominal = real + inflation \\
+Generalised FE & $(1+r_h)/(1+r_f) = (1+i_h)/(1+i_f)$ & Real rates equalise \\
+IFE (exact) & $e_t = e_0 \times (1+r_h)^t/(1+r_f)^t$ & Real rates equal + IFE \\
+IRP (exact) & $f_t = e_0 \times (1+r_h)^t/(1+r_f)^t$ & No-arbitrage \\
+IRP/IFE approx. & $\Delta\%e \approx r_h - r_f$ & Small differentials \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection*{Weekly Revision Checklist}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] I can calculate a nominal interest rate from real rate + inflation (exact formula).
+  \item[\cb] I can apply the IFE to find the expected future spot rate.
+  \item[\cb] I can reverse the IFE to find an unknown interest rate.
+  \item[\cb] I understand why IRP must hold (covered arbitrage argument).
+  \item[\cb] I can check whether a covered arbitrage profit exists and describe the transactions.
+  \item[\cb] I can calculate whether a forward contract or money market strategy yields a higher speculative profit.
+  \item[\cb] I can explain the difference between IFE and IRP.
+\end{itemize}
+
+\subsubsection*{Sources Used for Week 3}
+\textit{Lecture material:} 3 AB March chapter4\_mfm\_slides2024 (Edit)[1] Read-Only; FINS3616 Lecture A M-transcript W3 A; FINS3616 Lecture B T-transcript W3 B. \textit{Tutorial material:} Week 3 tutorial questions; Final Week 3 final Tutorial Solutions (Updated). \textit{Supplementary material:} Week 3 Ch 4-extra proofs and comments-Part 2-revised version.
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Week 4 — Currency Derivatives: Futures, Options, and Swaps}
+
+\subsection{Weekly Overview}
+
+Week 4 introduces the derivative instruments that MNCs use to manage exchange-rate risk and interest-rate risk over longer horizons. Chapter 7 covers currency futures and currency options (calls and puts). Chapter 8 introduces interest rate swaps and currency swaps.
+
+The key conceptual distinction in Week 4 is between \textit{obligations} and \textit{rights}: a futures or forward contract creates an obligation on both parties to transact at the agreed rate; an options contract gives the buyer the right but not the obligation to transact. Swaps extend this logic to multi-period cash-flow exchanges and are particularly important for long-term risk management.
+
+Tutorial Week 4 tests both conceptual and numerical skills: daily settlement mechanics for futures, profit/loss payoffs for calls and puts, the economics of comparative advantage in swaps, and the Disney yen royalty swap case.
+
+\subsection{Learning Outcomes}
+
+After studying Week 4, students should be able to:
+\begin{itemize}
+  \item Distinguish futures from forward contracts (at least 5 dimensions).
+  \item Calculate daily profit/loss using the mark-to-market settlement process.
+  \item Explain what a margin call is and when it occurs.
+  \item Calculate profit/loss on a currency futures arbitrage.
+  \item Define call and put options, and all associated terminology.
+  \item Calculate profit/loss for buying and selling calls and puts.
+  \item Determine when an option is in-the-money, at-the-money, or out-of-the-money.
+  \item Choose between futures and options for hedging a known vs.\ contingent exposure.
+  \item Define an interest rate swap and explain the comparative advantage argument.
+  \item Calculate net borrowing costs under a classic interest rate swap.
+  \item Define a currency swap and explain the Disney yen royalty transaction.
+\end{itemize}
+
+\subsection{Currency Futures}
+
+\subsubsection{Forward vs.\ Futures: Key Differences}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Feature} & \textbf{Forward Contract} & \textbf{Futures Contract} \\
+\midrule
+Trading venue & Over-the-counter (banks) & Exchange-traded (e.g., CME) \\
+Regulation & Self-regulating & Regulated (CFTC) \\
+Contract size & Customisable & Standardised \\
+Delivery dates & Any date & Specific fixed dates \\
+Actual delivery & $>90\%$ settled by delivery & $<1\%$ actual delivery \\
+Margins & Not required & Required (initial + maintenance) \\
+Counterparty risk & Both parties bear it & Exchange assumes it \\
+Settlement & End of contract & Daily (marking-to-market) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Margins and Marking-to-Market}
+
+\begin{conceptbox}{Marking-to-Market}
+Futures contracts are \textbf{marked to market} daily: at the end of each trading day (2pm CT for CME currency futures), profits are credited to and losses debited from the investor's margin account. This daily settlement process eliminates the accumulation of large unrealised losses.
+
+\begin{itemize}
+  \item \textbf{Initial margin:} cash deposited when entering the contract.
+  \item \textbf{Maintenance margin:} minimum balance required. If the account falls below this level, a \textbf{margin call} requires the investor to top up to the initial margin (not just the maintenance margin).
+\end{itemize}
+\end{conceptbox}
+
+\begin{methodbox}{Daily Settlement (Marking-to-Market) Calculation}
+\textbf{Step 1:} Identify the futures price change from the previous settlement.
+
+\textbf{Step 2:} Profit/loss $=$ price change $\times$ contract size.
+
+\textbf{Step 3:} Add profit (or subtract loss) from the margin account.
+
+\textbf{Step 4:} If margin balance $<$ maintenance margin $\Rightarrow$ margin call; top up to \textbf{initial} margin.
+
+\textbf{Total profit/loss at expiry} $=$ (final delivery price $-$ original contract price) $\times$ contract size.
+\end{methodbox}
+
+\paragraph{Worked Example (Tutorial Week 4, Problem 1).}
+
+Long position in GBP futures; initial price $= \$1.78/\text{£}$; contract size $= £62{,}500$.
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Day & Futures Price & Daily P/L & Margin Balance & Margin Call \\
+\midrule
+Monday (open) & \$1.78 & \$0 & \$2,530 & --- \\
+Monday (close) & \$1.79 & $+625$ & \$3,155 & --- \\
+Tuesday (close) & \$1.80 & $+625$ & \$3,780 & --- \\
+Wednesday (close) & \$1.785 & $-937.5$ & \$2,842.5 & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Daily P/L: Mon = $(1.79 - 1.78) \times 62{,}500 = \$625$; Tue = $(1.80 - 1.79) \times 62{,}500 = \$625$; Wed = $(1.785 - 1.80) \times 62{,}500 = -\$937.50$.
+
+\textbf{Net profit:} $(1.785 - 1.78) \times 62{,}500 = \$312.50$. (Delivery is at \$1.785; contract was entered at \$1.78.)
+
+\begin{mistakebox}{Margin Call Replenishment Level}
+\textbf{Incorrect:} Restoring the margin to the \textit{maintenance} margin level.
+
+\textbf{Correct:} A margin call requires restoring the balance to the \textit{initial} margin level, not just the maintenance margin level.
+\end{mistakebox}
+
+\subsubsection{Futures Arbitrage}
+
+\begin{methodbox}{Futures-Forward Arbitrage}
+If the futures price differs from the forward price for the same delivery date:
+\begin{itemize}
+  \item If futures price $>$ forward rate: \textbf{sell} the futures and \textbf{buy} the forward.
+  \item If futures price $<$ forward rate: \textbf{buy} the futures and \textbf{sell} the forward.
+\end{itemize}
+Profit per contract $=$ |futures price $-$ forward price| $\times$ contract size.
+\end{methodbox}
+
+\paragraph{Worked Example (Problem 2).}
+Forward ask for euros (March 20) $= \$0.9127$; IMM futures (March 20) $= \$0.9145$; contract size $= €125{,}000$.
+
+Since futures $>$ forward: sell futures at 0.9145, buy forward at 0.9127.
+
+\textbf{Profit:} $125{,}000 \times (0.9145 - 0.9127) = \$225$.
+
+\subsubsection{Hedging with Futures: MNC Application}
+
+An MNC with a known future foreign currency exposure can hedge by taking an \textit{opposite} position in futures:
+\begin{itemize}
+  \item \textbf{Future payable in FC (e.g., importing):} the MNC is short FC $\Rightarrow$ buy futures (go long).
+  \item \textbf{Future receivable in FC (e.g., exporting):} the MNC is long FC $\Rightarrow$ sell futures (go short).
+\end{itemize}
+
+Number of contracts $=$ exposure $\div$ contract size.
+
+\textbf{Example (Tutorial Question 4a):} Texas Instruments must pay €10 million in 90 days. Contract size $= €125{,}000$. Buy $10{,}000{,}000/125{,}000 = 80$ futures contracts.
+
+\subsection{Currency Options}
+
+\subsubsection{Definitions}
+
+\begin{conceptbox}{Options Terminology}
+\begin{itemize}
+  \item \textbf{Call option:} gives the buyer the \textit{right to buy} the underlying currency at the strike price.
+  \item \textbf{Put option:} gives the buyer the \textit{right to sell} the underlying currency at the strike price.
+  \item \textbf{Strike (exercise) price $K$:} the pre-agreed price at which the option can be exercised.
+  \item \textbf{Premium:} the price paid for the option (upfront, non-refundable).
+  \item \textbf{American option:} can be exercised at any time up to expiry.
+  \item \textbf{European option:} can be exercised only at expiry.
+  \item \textbf{In-the-money:} call if $S_T > K$; put if $S_T < K$.
+  \item \textbf{At-the-money:} $S_T = K$.
+  \item \textbf{Out-of-the-money:} call if $S_T < K$; put if $S_T > K$.
+\end{itemize}
+\end{conceptbox}
+
+\subsubsection{Profit and Loss Profiles}
+
+The four basic option positions produce four distinct payoff profiles.
+
+\paragraph{Buying a Call (Long Call).}
+\begin{itemize}
+  \item \textbf{Payoff at expiry:} $\max(S_T - K, 0)$.
+  \item \textbf{Net profit:} $\max(S_T - K, 0) - \text{premium}$.
+  \item \textbf{Break-even:} $S_T = K + \text{premium}$.
+  \item \textbf{Maximum loss:} the premium paid (if $S_T \leq K$, you do not exercise).
+  \item \textbf{Maximum gain:} theoretically unlimited.
+\end{itemize}
+
+\paragraph{Selling a Call (Short Call).}
+\begin{itemize}
+  \item \textbf{Net profit:} premium $- \max(S_T - K, 0)$.
+  \item \textbf{Maximum gain:} the premium received.
+  \item \textbf{Maximum loss:} theoretically unlimited (mirrors the long call).
+\end{itemize}
+
+\paragraph{Buying a Put (Long Put).}
+\begin{itemize}
+  \item \textbf{Payoff at expiry:} $\max(K - S_T, 0)$.
+  \item \textbf{Net profit:} $\max(K - S_T, 0) - \text{premium}$.
+  \item \textbf{Break-even:} $S_T = K - \text{premium}$.
+  \item \textbf{Maximum gain:} up to $K - \text{premium}$ (as $S_T \to 0$, put is more valuable).
+\end{itemize}
+
+\paragraph{Selling a Put (Short Put).}
+\begin{itemize}
+  \item \textbf{Maximum gain:} the premium received.
+  \item \textbf{Maximum loss:} large if $S_T \ll K$.
+\end{itemize}
+
+\begin{formulabox}{Option Profit/Loss Formulas}
+\textbf{Call buyer profit:} $\pi = \max(S_T - K, 0) - c$
+
+\textbf{Put buyer profit:} $\pi = \max(K - S_T, 0) - p$
+
+\textbf{Call writer profit:} $\pi = c - \max(S_T - K, 0)$
+
+\textbf{Put writer profit:} $\pi = p - \max(K - S_T, 0)$
+
+where $c$ = call premium per unit, $p$ = put premium per unit, $K$ = strike price, $S_T$ = spot price at expiry.
+
+\textbf{Total profit} = profit per unit $\times$ contract size.
+\end{formulabox}
+
+\paragraph{Worked Example (Tutorial Week 4, Problem 5).}
+Citigroup \textit{sells} a call on €500{,}000 at premium $\$0.04/\text{€}$; strike $K = \$0.91/\text{€}$; $S_T = \$0.93/\text{€}$.
+
+Since $S_T = 0.93 > K = 0.91$, the buyer exercises.
+
+\textbf{Citigroup's cost per euro:} buys at spot $0.93$, sells at strike $0.91 \Rightarrow$ loss of $0.02/\text{€}$.
+
+\textbf{Net:} $+0.04$ (premium) $- 0.02$ (exercise loss) $= +\$0.02/\text{€}$.
+
+\textbf{Total profit:} $0.02 \times 500{,}000 = \$10{,}000$.
+
+\paragraph{Worked Example (Tutorial Week 4, Problem 6).}
+
+Buy 3 June call options on EUR; strike 90 (i.e., $\$0.90/\text{€}$, price $= 2.3$ cents/€; contract size $= €62{,}500$.
+
+\textbf{(a) Total initial cost:}
+\[
+  3 \times 62{,}500 \times \$0.023 = \$4{,}312.50
+\]
+
+\textbf{(b) Sell after 60 days at 3.8 cents/€}. Profit per unit $= 1.5$ cents $= \$0.015/\text{€}$.
+
+Gross profit $= 0.015 \times 3 \times 62{,}500 = \$2{,}812.50$.
+
+Less brokerage: $\$5 \times 3 \times 2 = \$30$.
+
+Less opportunity cost on premium: $\$4{,}312.50 \times 0.08 \times (60/365) = \$56.71$.
+
+\textbf{Net profit:} $\$2{,}812.50 - \$30 - \$56.71 = \$2{,}725.79$.
+
+\subsubsection{Futures vs.\ Options for Hedging}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & \textbf{Futures/Forwards} & \textbf{Options} \\
+\midrule
+Obligation & Must transact at set price & Right, not obligation \\
+Best for & Known future currency flows & Contingent (uncertain) currency flows \\
+Downside protection & Full (eliminates risk both ways) & Full downside; keeps upside \\
+Upside potential & Eliminated & Retained (buyer can choose not to exercise) \\
+Cost & Bid-ask spread only & Option premium (upfront) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Key principle:} If the quantity of foreign currency exposure is known $\Rightarrow$ futures/forwards are preferable (no premium, obligation is fine). If the quantity is uncertain (e.g., contingent on winning a bid) $\Rightarrow$ options are preferable.
+
+\paragraph{Bechtel Strategy Analysis (Tutorial Question 5).}
+
+Bechtel buys a put option (downside protection if yen falls) and simultaneously sells a call (sacrifices upside if yen rises). The combination of a long put and short call at the same strike $=$ a \textbf{short forward}. If Bechtel loses its bid and the yen appreciates, it faces an exchange loss on the short forward, as if it had sold yen forward --- the supposed option hedge has re-created a forward exposure.
+
+\subsection{Interest Rate Swaps}
+
+\begin{conceptbox}{Economic Advantage of Swaps}
+Swaps create economic value because counterparties have comparative advantages in different types of borrowing. By each borrowing where it has the cheapest access and then swapping cash flows, both parties can reduce their overall financing costs. This is the principle of comparative advantage applied to financial markets.
+\end{conceptbox}
+
+\subsubsection{What is an Interest Rate Swap?}
+
+An interest rate swap is an agreement between two parties to exchange interest payments on a notional principal amount over a specified period. No principal changes hands. The most common form is the \textbf{coupon swap}:
+
+\begin{itemize}
+  \item Party A pays a fixed rate to Party B.
+  \item Party B pays a floating rate (referenced to SOFR or LIBOR) to Party A.
+\end{itemize}
+
+\subsubsection{Classic Swap: Worked Example}
+
+\paragraph{Given (Chapter 8 Example).}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Borrower & Fixed-rate access & Floating-rate access \\
+\midrule
+Party A (BBB) & 8.50\% & SOFR $+$ 0.5\% \\
+Party B (AAA) & 7.00\% & SOFR \\
+\textbf{Difference} & \textbf{1.50\%} & \textbf{0.50\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Party A wants fixed; Party B wants floating. Party B has an absolute advantage in both, but Party A has a relative disadvantage in fixed borrowing (it pays 1.5\% more for fixed vs.\ only 0.5\% more for floating). Therefore Party A has a comparative advantage in \textit{floating} borrowing.
+
+\textbf{Total gain from swap:} $1.5\% - 0.5\% = 1.0\%$ (the basis-point differential is the total gain to be shared).
+
+\paragraph{Via intermediary bank (ACME):}
+
+Party A borrows at floating (SOFR $+$ 0.5\%), swaps to pay 7.35\% fixed and receive SOFR.
+
+Net cost to A: $-(\text{SOFR}+0.5\%) - 7.35\% + \text{SOFR} = -7.85\%$ fixed. Without swap: 8.5\%. \textbf{Saving: 0.65\%}.
+
+Party B borrows at fixed 7.0\%, swaps to pay SOFR and receive 7.25\%.
+
+Net cost to B: $-7.0\% - \text{SOFR} + 7.25\% = -\text{SOFR} + 0.25\%$ floating. Without swap: SOFR. \textbf{Saving: 0.25\%}.
+
+\textbf{ACME's profit:} $7.35\% - 7.25\% = 0.10\%$ on the fixed legs; SOFR in $=$ SOFR out (netting to zero).
+
+Total savings: $0.65\% + 0.25\% + 0.10\% = 1.00\%$ = the basis-point differential. ✓
+
+\begin{mistakebox}{Swap Is Not Zero-Sum}
+\textbf{Incorrect:} "For one party to benefit from a swap, the other must lose."
+
+\textbf{Correct:} Both parties benefit. The swap creates economic value by exploiting comparative advantages in credit markets. The total gain equals the basis-point differential, which is shared between the parties (and intermediary). Both parties enter the swap voluntarily, so both perceive a benefit.
+\end{mistakebox}
+
+\subsection{Currency Swaps}
+
+A currency swap extends the interest rate swap concept to \textit{different currencies}: the counterparties exchange both interest payments \textit{and} principal amounts denominated in different currencies.
+
+\begin{conceptbox}{Currency Swap vs.\ Interest Rate Swap}
+\begin{itemize}
+  \item Interest rate swap: same currency, different rate types (fixed $\leftrightarrow$ floating). \textbf{No} principal exchange.
+  \item Currency swap: \textbf{different} currencies, can be fixed/fixed or fixed/floating. Principal \textbf{is} exchanged at maturity (and often at inception).
+\end{itemize}
+The purpose of a currency swap is to manage long-term exchange-rate risk and obtain funding in a foreign currency at lower cost.
+\end{conceptbox}
+
+\subsubsection{Disney Yen Royalty Swap (Tutorial Week 4, Problem 3)}
+
+In May 1988, Walt Disney sold a 20-year stream of yen royalties (PV = ¥93 billion, discounted at 6\%) from Tokyo Disneyland to Japanese investors, converting the proceeds to dollars and investing at 10\%.
+
+\textbf{(a)} Exchange rate: ¥124 = \$1.
+
+\[
+  \text{USD proceeds} = 93{,}000{,}000{,}000 / 124 = \$750{,}000{,}000
+\]
+
+\textbf{(b) Equivalence to a currency swap:} Disney's stream of yen royalties is equivalent to a yen bond. It exchanged that yen bond (with yen cash inflows) for dollar bonds (with dollar cash inflows). This is precisely a fixed-for-fixed currency swap, except that Disney's swap involves cash \textit{inflows} rather than the usual outflows.
+
+\textbf{(c) Gary Wilson's "free lunch" claim:} Disney CFO Gary Wilson claimed the firm "got money at 6\% and reinvested it at 10\%", implying a free 4\% gain. This is an error. According to the International Fisher effect, the yen interest rate is 4 percentage points lower than the USD rate primarily because the market expects the dollar to \textit{depreciate} by approximately 4\% annually against the yen. The nominal rate differential does not represent free money; it reflects expected currency movement. Comparing a 6\% yen rate to a 10\% dollar rate is comparing apples to oranges.
+
+\subsection{End-of-Week 4 Summary}
+
+\subsubsection*{Key Takeaways}
+\begin{enumerate}
+  \item Futures are exchange-traded, standardised, and marked to market daily; forwards are OTC and settled at expiry.
+  \item Margin calls require replenishment to the \textit{initial} margin, not just the maintenance level.
+  \item Option buyers have rights (pay premium); option writers have obligations (receive premium).
+  \item Long call: unlimited upside, loss capped at premium. Short call: gain capped at premium, unlimited loss.
+  \item Long put: gain capped at $K$ (currency cannot fall below zero), loss capped at premium.
+  \item Use futures for known exposures; use options for contingent exposures.
+  \item Swaps create value through comparative advantage; both parties benefit.
+  \item Currency swaps involve principal exchange; interest rate swaps do not.
+  \item Comparing nominal rates in different currencies without adjusting for expected currency movements (as Gary Wilson did) is a classic error.
+\end{enumerate}
+
+\subsubsection*{Weekly Revision Checklist}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] I can distinguish futures from forwards on at least 5 dimensions.
+  \item[\cb] I can compute daily marking-to-market and identify when a margin call occurs.
+  \item[\cb] I can calculate total profit/loss for a futures position.
+  \item[\cb] I can calculate profit/loss for all four option positions (long/short call, long/short put).
+  \item[\cb] I can determine the break-even spot rate for an option position.
+  \item[\cb] I can explain when to use options versus futures for hedging.
+  \item[\cb] I can calculate net borrowing costs under an interest rate swap.
+  \item[\cb] I understand why Gary Wilson's comment about Disney was misleading.
+\end{itemize}
+
+\subsubsection*{Sources Used for Week 4}
+\textit{Lecture material:} chapter7\_mfm\_slides2026-2; chapter8\_mfm\_slides2026-2; FINS3616 Lecture A M-transcript W4 A; FINS3616 Lecture B T-transcript W4 B. \textit{Tutorial material:} Questions for Chs 7 and 8 (repository filename: ``Quetions for Chs 7 and 8''); Final Week 4 final Tutorial Solutions (Updated).
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Cross-Week Connections}
+
+The five parity conditions form a unified framework in which each condition links a pair of economic variables. Understanding the connections prevents treating each formula as an isolated memorisation exercise.
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+\textbf{Condition} & \textbf{Links} & \textbf{Exact form} & \textbf{Approx.} \\
+\midrule
+Absolute PPP & Price levels $\leftrightarrow$ spot rate & $e_0 = P_h/P_f$ & --- \\
+Relative PPP & Inflation $\leftrightarrow$ spot change & $e_t = e_0 \times (1+i_h)^t/(1+i_f)^t$ & $\Delta\%e \approx i_h - i_f$ \\
+Fisher Effect & Inflation $\leftrightarrow$ nominal rates & $(1+r) = (1+a)(1+i)$ & $r \approx a + i$ \\
+IFE & Interest rates $\leftrightarrow$ spot change & $e_t = e_0 \times (1+r_h)^t/(1+r_f)^t$ & $\Delta\%e \approx r_h - r_f$ \\
+IRP & Interest rates $\leftrightarrow$ forward premium & $f_t = e_0 \times (1+r_h)^t/(1+r_f)^t$ & $\Delta\%f \approx r_h - r_f$ \\
+UFR & Forward rate $\leftrightarrow$ future spot & $f_t = e_t$ & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{How PPP and the Fisher Effect Produce IFE.}
+PPP says: $\Delta\%e \approx i_h - i_f$ (exchange rate reflects inflation differential).
+
+GFE says: $r_h - r_f \approx i_h - i_f$ (interest rate differential reflects inflation differential).
+
+Substituting GFE into PPP: $\Delta\%e \approx r_h - r_f$. This is the IFE.
+
+\paragraph{Why IRP and IFE Have the Same Formula.}
+Both IRP (forward rate) and IFE (expected spot rate) involve the same right-hand side: $(1+r_h)/(1+r_f)$. The difference is that IRP refers to the forward rate locked in today, while IFE refers to the expected future spot rate. If both hold, the forward rate equals the expected spot rate (UFR).
+
+\paragraph{Derivatives Build on Parity Theory.}
+The forward rate computed under IRP is the basis for futures pricing (with adjustments for marking-to-market). The option premium reflects the probability that the spot rate will exceed the strike price. Currency swap economics reflect the IFE: the yen-dollar interest rate differential reflects expected yen appreciation, which is why the Disney "free lunch" does not exist.
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Master Formula List}
+
+\subsection*{Week 1 Formulas}
+
+\begin{formulabox}{Percentage Change in Exchange Rate}
+\[
+  \%\Delta e = \frac{e_1 - e_0}{e_0} \times 100
+\]
+If $e$ rises: home currency depreciated (foreign currency is more expensive).
+
+\textbf{Note:} $\%$ depreciation of A $\neq$ $\%$ appreciation of B.
+If A depreciates by $x\%$: B appreciates by $x/(1-x) \times 100\%$.
+\end{formulabox}
+
+\subsection*{Week 2 Formulas}
+
+\begin{formulabox}{Bid-Ask Spread}
+\[
+  \text{Spread} = \frac{\text{Ask} - \text{Bid}}{\text{Ask}} \times 100
+\]
+\end{formulabox}
+
+\begin{formulabox}{Forward Premium (+) or Discount ($-$)}
+\[
+  \text{Annual premium/discount} = \frac{F - S_0}{S_0} \times \frac{360}{\text{days}} \times 100
+\]
+\end{formulabox}
+
+\begin{formulabox}{Absolute PPP}
+\[
+  e_0 = \frac{P_h}{P_f}
+\]
+Implied by the Law of One Price. Does not hold in practice.
+\end{formulabox}
+
+\begin{formulabox}{Relative PPP (Exact)}
+\[
+  e_t = e_0 \times \left(\frac{1 + i_h}{1 + i_f}\right)^t
+\]
+Approximation: $\dfrac{e_t - e_0}{e_0} \approx i_h - i_f$
+\end{formulabox}
+
+\begin{formulabox}{Real Exchange Rate}
+\[
+  e_t^{\text{real}} = e_t^{\text{nominal}} \times \left(\frac{1 + i_f}{1 + i_h}\right)^t
+\]
+If $e_t^{\text{real}} = e_0$: PPP held. If $e_t^{\text{real}} \neq e_0$: PPP did not hold.
+\end{formulabox}
+
+\subsection*{Week 3 Formulas}
+
+\begin{formulabox}{Fisher Effect}
+\[
+  (1 + r) = (1 + a)(1 + i) \qquad \text{or approx.} \quad r \approx a + i
+\]
+Real rate: $1 + a = (1+r)/(1+i)$
+\end{formulabox}
+
+\begin{formulabox}{International Fisher Effect (IFE)}
+\[
+  e_t = e_0 \times \left(\frac{1 + r_h}{1 + r_f}\right)^t \qquad \text{approx.} \quad \Delta\%e \approx r_h - r_f
+\]
+\end{formulabox}
+
+\begin{formulabox}{Interest Rate Parity (IRP)}
+\[
+  f_t = e_0 \times \left(\frac{1 + r_h}{1 + r_f}\right)^t
+\]
+No-arbitrage condition. Enforced by covered interest arbitrage.
+
+To check: compute $e_0 \times (1+r_h)/(1+r_f)$ and compare to the actual forward rate.
+\end{formulabox}
+
+\subsection*{Week 4 Formulas}
+
+\begin{formulabox}{Futures Daily P/L and Total P/L}
+\[
+  \text{Daily P/L} = (\text{Today's price} - \text{Yesterday's settlement price}) \times \text{Contract size}
+\]
+\[
+  \text{Total P/L} = (\text{Final price} - \text{Entry price}) \times \text{Contract size}
+\]
+\end{formulabox}
+
+\begin{formulabox}{Option Profit/Loss}
+\[
+  \pi_{\text{long call}} = \max(S_T - K, 0) - c
+\]
+\[
+  \pi_{\text{long put}} = \max(K - S_T, 0) - p
+\]
+Break-even for long call: $S_T = K + c$. Break-even for long put: $S_T = K - p$.
+\end{formulabox}
+
+\begin{formulabox}{Cross Rate (No Bid-Ask)}
+\[
+  e_{A/B} = \frac{e_{A/\$}}{e_{B/\$}}
+\]
+\end{formulabox}
+
+\begin{formulabox}{Cross Rate with Bid-Ask Spread}
+\[
+  \text{Bid}_{B/A} = \frac{\text{Bid}_{B/\$}}{\text{Ask}_{A/\$}} \qquad \text{Ask}_{B/A} = \frac{\text{Ask}_{B/\$}}{\text{Bid}_{A/\$}}
+\]
+\end{formulabox}
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Tutorial Question Methods Summary}
+
+\subsection{Spot Rate Conversion and Cross Rate Problems}
+
+\textbf{Recognition cues:} Given exchange rates for two or more currency pairs; asked to find price in another currency, or to find the cross rate.
+
+\textbf{Step-by-step method:}
+\begin{enumerate}
+  \item Write the known exchange rates with units clearly (e.g., USD/EUR = 1.20 means \$1.20 per €1).
+  \item Multiply or divide rates so that unwanted currency units cancel.
+  \item If bid-ask spreads are present, select bid for selling the currency and ask for buying.
+\end{enumerate}
+
+\subsection{Forward Rate and Premium/Discount Problems}
+
+\textbf{Recognition cues:} Swap points given; or asked for the forward premium; or given spot and forward rates and asked whether it is a premium/discount.
+
+\textbf{Method:}
+\begin{enumerate}
+  \item Add swap points (in pips) to spot to get outright forward.
+  \item Apply premium/discount formula with correct annualisation.
+\end{enumerate}
+
+\subsection{Triangular Arbitrage}
+
+\textbf{Recognition cues:} Three exchange rates are given; asked whether arbitrage exists; or the implied cross rate differs from the quoted rate.
+
+\textbf{Method:}
+\begin{enumerate}
+  \item Compute the implied cross rate from two of the given rates.
+  \item Compare to the third given rate.
+  \item If they differ, buy cheap and sell dear; trace the three-transaction cycle.
+  \item Calculate profit as the difference between the starting and ending amounts.
+\end{enumerate}
+
+\subsection{Relative PPP Forecasting}
+
+\textbf{Recognition cues:} Given current exchange rate and inflation rates; asked to forecast future spot rate.
+
+\textbf{Method:}
+\begin{enumerate}
+  \item Apply: $e_t = e_0 \times (1+i_h)^t/(1+i_f)^t$.
+  \item To find real exchange rate: $e_t^{\text{real}} = e_t^{\text{nom}} \times (1+i_f)^t/(1+i_h)^t$.
+  \item Compare real exchange rate to $e_0$ to determine if PPP held.
+\end{enumerate}
+
+\subsection{Fisher Effect and IFE Calculations}
+
+\textbf{Recognition cues:} Given nominal interest rates and/or inflation rates; asked for real rate, future spot rate, or the required interest rate.
+
+\textbf{Method:}
+\begin{enumerate}
+  \item For real rate: $1 + a = (1+r)/(1+i)$.
+  \item For future spot (IFE): $e_t = e_0 \times (1+r_h)^t/(1+r_f)^t$.
+  \item To find unknown interest rate: rearrange the IFE equation.
+\end{enumerate}
+
+\subsection{Covered Interest Arbitrage}
+
+\textbf{Recognition cues:} Given spot rate, forward rate, and two interest rates; asked whether arbitrage exists.
+
+\textbf{Method:}
+\begin{enumerate}
+  \item Compute IRP-implied forward rate: $f^* = e_0 \times (1+r_h)/(1+r_f)$.
+  \item Compare $f^*$ to the actual forward rate $f$.
+  \item If $f > f^*$: borrow home, buy foreign, invest abroad, sell forward.
+  \item If $f < f^*$: borrow foreign, buy home, invest domestically, buy foreign forward.
+  \item Calculate the annualised profit per dollar invested.
+  \item If transaction costs are given, check whether profit exceeds costs.
+\end{enumerate}
+
+\subsection{Futures Mark-to-Market}
+
+\textbf{Recognition cues:} Daily futures prices given; asked for daily P/L, margin balance, and whether a margin call occurs.
+
+\textbf{Method:}
+\begin{enumerate}
+  \item For each day, compute: P/L = price change $\times$ contract size.
+  \item Update margin balance: new balance = previous balance + P/L.
+  \item If new balance $<$ maintenance margin $\Rightarrow$ margin call; replenish to initial margin.
+  \item Total P/L = (final price $-$ initial price) $\times$ contract size.
+\end{enumerate}
+
+\subsection{Option Profit/Loss}
+
+\textbf{Recognition cues:} Strike price, premium, spot price at expiry, contract size given; asked for profit.
+
+\textbf{Method:}
+\begin{enumerate}
+  \item Determine whether the option is in-the-money at expiry.
+  \item If in-the-money: compute the intrinsic value (exercise payoff).
+  \item Subtract premium (for buyers); add premium (for writers).
+  \item Multiply by contract size for total dollar profit.
+\end{enumerate}
+
+\subsection{Interest Rate Swap Net Cost}
+
+\textbf{Recognition cues:} Two parties have different fixed and floating rate access; asked for net cost, savings, or the swap structure.
+
+\textbf{Method:}
+\begin{enumerate}
+  \item Identify which party has a comparative advantage in each market.
+  \item Total gain = fixed-rate differential $-$ floating-rate differential.
+  \item Each party borrows in their advantageous market, then swaps.
+  \item Net cost = cost of own borrowing + swap payment $-$ swap receipt.
+\end{enumerate}
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Common Mistakes and Exam Traps}
+
+\begin{mistakebox}{Notation Confusion (Textbook vs.\ Market Convention)}
+Students use the Bloomberg/Reuters market convention (A/B = units of B per unit of A) instead of the textbook convention (A/B = units of A per unit of B). Always use the textbook convention in this course. When in doubt, check by asking: does the number make sense as a price? AUD/USD $= 0.72$ means \$0.72 per A\$1 --- sensible.
+\end{mistakebox}
+
+\begin{mistakebox}{Symmetric Depreciation/Appreciation}
+If currency A depreciates by 17\% against B, students assume B appreciates by 17\% against A. In fact, B appreciates by $17/(100-17) = 20.5\%$. Always recompute using the correct formula with the new denominator.
+\end{mistakebox}
+
+\begin{mistakebox}{Using Wrong Bid or Ask Rate}
+Students apply the mid-rate or the wrong side of the quote. Rule: when you sell a currency to the bank, you receive the bid (lower); when you buy a currency from the bank, you pay the ask (higher). "The bank always wins."
+\end{mistakebox}
+
+\begin{mistakebox}{Using the Approximation at High Inflation}
+The approximate Fisher effect ($r \approx a + i$) is significantly inaccurate at high inflation rates. Problem 3 in the tutorial demonstrates this: with 100\% inflation, the approximation gives 105\% but the correct answer is 110\%.
+\end{mistakebox}
+
+\begin{mistakebox}{Confusing IFE and IRP}
+Both IFE and IRP have the same formula: $e_t$ or $f_t = e_0 \times (1+r_h)^t/(1+r_f)^t$. The difference is: IFE $e_t$ is the \textit{expected future spot rate} (uncertain); IRP $f_t$ is the current \textit{forward rate} (certain, locked in today). IRP holds tightly because it can be enforced through riskless covered arbitrage; IFE holds only on average.
+\end{mistakebox}
+
+\begin{mistakebox}{Margin Call Replenishment Level}
+Students think a margin call requires only topping up to the maintenance margin. The correct rule is: a margin call requires topping up to the \textit{initial} margin level.
+\end{mistakebox}
+
+\begin{mistakebox}{Option Exercise Direction}
+Students confuse when to exercise calls vs.\ puts. Call: exercise when $S_T > K$ (buy cheap at $K$, sell at $S_T$). Put: exercise when $S_T < K$ (buy cheap at $S_T$, sell at $K$). If the option is out-of-the-money, do not exercise; the loss is limited to the premium.
+\end{mistakebox}
+
+\begin{mistakebox}{Swap Zero-Sum Error}
+Students believe that for one party to benefit from a swap, the other must lose. This is incorrect. Swaps create value through comparative advantage; both parties benefit. The total gain equals the basis-point differential and is shared among the parties.
+\end{mistakebox}
+
+\begin{mistakebox}{Comparing Interest Rates Across Currencies (Disney Error)}
+Comparing a yen interest rate of 6\% to a dollar rate of 10\% and concluding the firm gets a "free 4\%" is incorrect. The IFE predicts the dollar will depreciate by approximately 4\% p.a. against the yen, offsetting the nominal rate advantage. Nominal rates in different currencies cannot be directly compared without adjusting for expected currency movements.
+\end{mistakebox}
+
+\begin{mistakebox}{Absolute PPP as a Forecasting Tool}
+Students use absolute PPP to forecast future exchange rates. Absolute PPP asks what the exchange rate \textit{should be} based on price levels --- it does not predict how it will \textit{change}. For forecasting, use relative PPP or the IFE.
+\end{mistakebox}
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{High-Yield Midterm Revision Checklist}
+
+\subsection*{Week 1}
+
+\textbf{Essential definitions:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Multinational corporation (MNC)
+  \item[\cb] Exchange rate (textbook notation: $A/B$ = units of $A$ per unit of $B$)
+  \item[\cb] Exchange-rate risk, political risk, regulatory risk
+  \item[\cb] Sterilised vs.\ unsterilised FX intervention
+\end{itemize}
+
+\textbf{Formulas to know:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Percentage change in exchange rate: $\%\Delta e = (e_1 - e_0)/e_0$
+  \item[\cb] Asymmetric appreciation/depreciation
+\end{itemize}
+
+\textbf{Methods to practise:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Converting a foreign price to home currency
+  \item[\cb] Identifying the direction of exchange-rate change given inflation/interest rate/growth changes
+\end{itemize}
+
+\subsection*{Week 2}
+
+\textbf{Formulas to memorise:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Bid-ask spread formula
+  \item[\cb] Forward premium/discount (annualised)
+  \item[\cb] Absolute PPP: $e_0 = P_h/P_f$
+  \item[\cb] Relative PPP: $e_t = e_0 \times (1+i_h)^t/(1+i_f)^t$
+  \item[\cb] Real exchange rate formula
+\end{itemize}
+
+\textbf{Tutorial methods to practise:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Outright forward from swap points (Problem 7)
+  \item[\cb] Buy/sell using correct bid or ask (Problem 8)
+  \item[\cb] Cross rate with bid-ask (Chapter 6 Problems)
+  \item[\cb] Triangular arbitrage (Problem 9)
+  \item[\cb] Relative PPP forecasting (Problems 7, 8, Additional Q1, 2)
+\end{itemize}
+
+\subsection*{Week 3}
+
+\textbf{Formulas to memorise:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Fisher effect: $(1+r) = (1+a)(1+i)$
+  \item[\cb] IFE: $e_t = e_0 \times (1+r_h)^t/(1+r_f)^t$
+  \item[\cb] IRP: $f_t = e_0 \times (1+r_h)^t/(1+r_f)^t$
+\end{itemize}
+
+\textbf{Derivations to understand:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] How IFE follows from combining GFE and relative PPP
+  \item[\cb] How IRP is enforced by covered interest arbitrage
+\end{itemize}
+
+\textbf{Tutorial methods to practise:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Nominal rate from real + inflation (Problem 3)
+  \item[\cb] IFE forecasting and reverse IFE (Problem 5)
+  \item[\cb] Covered arbitrage detection and execution (Problem 14)
+  \item[\cb] Forward vs.\ money market speculation comparison (Problem 15)
+\end{itemize}
+
+\subsection*{Week 4}
+
+\textbf{Formulas to memorise:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Futures daily P/L and total P/L
+  \item[\cb] Option profit formulas (all four positions)
+  \item[\cb] Break-even spot rates for options
+\end{itemize}
+
+\textbf{Concepts requiring verbal interpretation:}
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Forwards vs.\ futures (5+ dimensions)
+  \item[\cb] Options vs.\ futures for hedging known vs.\ contingent exposures
+  \item[\cb] Why swap benefits both parties (comparative advantage)
+  \item[\cb] Why Disney's Gary Wilson was wrong (IFE)
+\end{itemize}
+
+\subsection*{Before the Midterm}
+
+\begin{itemize}[leftmargin=2em]
+  \item[\cb] Complete all tutorial questions from Weeks 1--4 without looking at solutions.
+  \item[\cb] Reproduce the formula list from memory; then check against this document.
+  \item[\cb] Explain in your own words what each formula means (not just what it calculates).
+  \item[\cb] Practise interpreting numerical answers: what does the result tell you about the economic situation?
+  \item[\cb] Review the Common Mistakes section and write a one-sentence prevention rule for each.
+  \item[\cb] Attempt mixed questions that combine concepts from different weeks (e.g., IFE + IRP, or PPP + Fisher effect).
+  \item[\cb] Practise under timed conditions.
+\end{itemize}
+
+\newpage
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\section{Source Register}
+
+The following repository files were used in compiling this study guide.
+
+\subsection*{Week 1}
+\begin{itemize}
+  \item \textbf{Lecture slides:} PPT Slides of Chapter 1.pdf; PPT Slides for Chapter 2.pdf
+  \item \textbf{Transcripts:} FINS3616 Lecture A M-transcript W1 A.txt; FINS3616 Lecture B T-transcript W1 B.txt
+  \item \textbf{Tutorial:} Week 1 final Tutorial Solutions[4]-2.pdf; Questions only for Week 1 final Tutorial Solutions (Updated)[4]-2.pdf
+  \item \textbf{Testbank:} ch01\_revised\_testbank.pdf; ch02\_revised\_testbank.pdf
+\end{itemize}
+
+\subsection*{Week 2}
+\begin{itemize}
+  \item \textbf{Lecture slides:} chapter4\_mfm\_slides2026 (Edit)[1] Read-Only.pdf; chapter6\_mfm\_slides2026 (Edit)[3] Read-Only.pdf
+  \item \textbf{Transcript:} FINS3616 Lecture B T-transcript W2 B.txt
+  \item \textbf{Tutorial:} Tutorial Questions for Week 2.pdf; Tutorial questions and their solutions for Week 2.pdf
+  \item \textbf{Supplementary:} Week 2 Ch 4-extra proofs and comments-Part 1.pdf; Week 2 Ch 6-extra proofs and comments-revised version.pdf
+  \item \textbf{Testbank (DOC files):} Testbank for Ch 4.doc; Testbank for Ch 6.doc (files present but content inaccessible in digital form)
+\end{itemize}
+
+\subsection*{Week 3}
+\begin{itemize}
+  \item \textbf{Lecture slides:} 3 AB March chapter4\_mfm\_slides2024 (Edit)[1] Read-Only.pdf
+  \item \textbf{Transcripts:} FINS3616 Lecture A M-transcript W3 A.txt; FINS3616 Lecture B T-transcript W3 B.txt
+  \item \textbf{Tutorial:} Week 3 tutorial questions.pdf; Final Week 3 final Tutorial Solutions (Updated).docx
+  \item \textbf{Supplementary:} Week 3 Ch 4-extra proofs and comments-Part 2-revised version.pdf
+  \item \textbf{Testbank (DOC):} Testbank Ch 4.doc (content inaccessible)
+\end{itemize}
+
+\subsection*{Week 4}
+\begin{itemize}
+  \item \textbf{Lecture slides:} chapter7\_mfm\_slides2026-2.pdf; chapter8\_mfm\_slides2026-2.pdf
+  \item \textbf{Transcripts:} FINS3616 Lecture A M-transcript W4 A.txt; FINS3616 Lecture B T-transcript W4 B.txt
+  \item \textbf{Tutorial:} Questions for Chs 7 and 8.pdf [file in repository as ``Quetions for Chs 7 and 8.pdf'']; Final Week 4 final Tutorial Solutions (Updated).pdf
+  \item \textbf{Testbank (DOC):} Testbank Ch 7.doc; Testbank Ch 8.doc (content inaccessible)
+\end{itemize}
+
+\vspace{0.5cm}
+\noindent\textit{Note: The DOC testbank files are present in the repository but contain only theme metadata and no accessible question content. The study guide is therefore based on the PDF and TXT sources listed above.}
+
+\end{document}
