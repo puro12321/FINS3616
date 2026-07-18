@@ -1,0 +1,339 @@
+% FINS3616 — International Business Finance
+% One-page A4 Exam Formula Sheet
+% XeLaTeX + unicode-math; same colour palette as FINS3616_Midterm_Study_Guide.tex
+\documentclass[7.5pt,a4paper]{article}
+
+%% ─── Packages ────────────────────────────────────────────────────────────────
+\usepackage{fontspec}
+\usepackage[margin=0.55cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{unicode-math}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{booktabs}
+
+%% ─── Fonts ───────────────────────────────────────────────────────────────────
+\setmainfont{TeX Gyre Pagella}[Ligatures=TeX]
+\setmathfont{Latin Modern Math}
+
+%% ─── Colours (matches study guide) ──────────────────────────────────────────
+\definecolor{FormulaGreenDark}{RGB}{34,120,58}
+\definecolor{FormulaGreenLight}{RGB}{230,248,234}
+\definecolor{MistakeRedDark}{RGB}{180,40,40}
+\definecolor{MistakeRedLight}{RGB}{253,232,232}
+\definecolor{MethodBlueDark}{RGB}{25,80,160}
+\definecolor{MethodBlueLight}{RGB}{230,240,255}
+\definecolor{HeadingColor}{RGB}{20,40,80}
+\definecolor{TextGrey}{RGB}{50,50,50}
+
+%% ─── tcolorbox ───────────────────────────────────────────────────────────────
+\tcbuselibrary{skins}
+
+\tcbset{
+  compactbox/.style={
+    enhanced,
+    boxrule=0.4pt,
+    arc=2pt,
+    left=2.5pt, right=2.5pt, top=1pt, bottom=1pt,
+    fonttitle=\bfseries\fontsize{6.2}{7}\selectfont,
+    before skip=2pt, after skip=2pt,
+    fontupper=\fontsize{6.6}{8}\selectfont,
+    toptitle=0.8pt, bottomtitle=0.8pt
+  }
+}
+
+\newtcolorbox{fsect}[1]{
+  compactbox,
+  colback=FormulaGreenLight,
+  colframe=FormulaGreenDark,
+  colbacktitle=FormulaGreenDark,
+  coltitle=white,
+  title={#1}
+}
+
+\newtcolorbox{trapbox}{
+  compactbox,
+  colback=MistakeRedLight,
+  colframe=MistakeRedDark,
+  colbacktitle=MistakeRedDark,
+  coltitle=white,
+  title={EXAM TRAPS --- Read before calculating}
+}
+
+\newtcolorbox{notebox}{
+  compactbox,
+  colback=MethodBlueLight,
+  colframe=MethodBlueDark,
+  colbacktitle=MethodBlueDark,
+  coltitle=white,
+  title={NOTATION KEY}
+}
+
+%% ─── Compact maths spacing ───────────────────────────────────────────────────
+\setlength{\abovedisplayskip}{1.5pt}
+\setlength{\belowdisplayskip}{1.5pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{1pt}
+
+%% ─── Lists ───────────────────────────────────────────────────────────────────
+\setlist[itemize]{
+  leftmargin=0.9em, itemsep=0pt, parsep=0pt, topsep=0.5pt,
+  label={\fontsize{5}{5}\selectfont\textbullet}
+}
+
+%% ─── General spacing ─────────────────────────────────────────────────────────
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\multicolsep}{2pt}
+\setlength{\columnsep}{5pt}
+
+%% ─── Shorthand ───────────────────────────────────────────────────────────────
+\newcommand{\dsp}{\displaystyle}
+\newcommand{\rh}{r_{\!h}}
+\newcommand{\rf}{r_{\!f}}
+\newcommand{\ih}{i_h}
+\newcommand{\iif}{i_f}          % NB: \iff is pre-defined; use \iif
+\newcommand{\kw}[1]{\textbf{#1}}
+\newcommand{\ex}[1]{\textit{\fontsize{5.8}{7}\selectfont #1}}
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+\pagestyle{empty}
+\color{TextGrey}
+\fontsize{6.6}{8}\selectfont
+
+%% ─── TITLE BAR ───────────────────────────────────────────────────────────────
+\noindent
+\colorbox{HeadingColor}{%
+  \parbox{\dimexpr\linewidth-4pt}{%
+    \vspace{1pt}\centering
+    \color{white}\bfseries\fontsize{8.5}{10}\selectfont
+    FINS3616 International Business Finance --- Exam Formula Sheet\par
+    \vspace{0.5pt}
+    \fontsize{6.5}{8}\selectfont\normalfont\color{white}
+    Convention: $e = \text{HC}/\text{FC}$\enspace (home currency per unit of foreign currency)\quad
+    $e\uparrow$=home depreciates \quad $e\downarrow$=home appreciates
+    \vspace{1pt}
+  }%
+}
+
+\vspace{2pt}
+
+%% ─── MAIN 3-COLUMN BODY ──────────────────────────────────────────────────────
+\begin{multicols}{3}
+
+%% ── COLUMN 1 ─────────────────────────────────────────────────────────────────
+
+\begin{notebox}
+$e_0$ = current spot;\quad $e_t$ = future/expected spot;\quad $f_t$ = forward rate\\
+$\rh,\rf$ = home/foreign nominal rate;\quad $a$ = real interest rate\\
+$\ih,\iif$ = home/foreign expected inflation;\quad $t$ = periods\\
+$S_T$ = spot at expiry;\quad $K$ = strike;\quad $c/p$ = call/put premium\\
+Bid $\leq$ mid $\leq$ Ask;\quad Dealer: buys at bid, sells at ask
+\end{notebox}
+
+\begin{fsect}{Exchange Rate Basics}
+\kw{Price conversion:}\quad $P_{\mathrm{HC}} = P_{\mathrm{FC}}\times e_0$\\[2pt]
+\kw{Percentage change:}
+\[
+  \%\Delta e = \frac{e_1-e_0}{e_0}\times 100
+\]
+$>0$: home depreciated.\quad $<0$: home appreciated.\\[2pt]
+\kw{If A depreciates by $x\%$, B appreciates by:}
+\[
+  \frac{x}{1-x}\times 100\%
+  \quad\ex{e.g.\ $x{=}0.17\!\Rightarrow\!20.5\%$}
+\]
+\kw{Reciprocal:}\quad $e_{B/A}=1/e_{A/B}$
+\end{fsect}
+
+\begin{fsect}{Bid--Ask Spreads \& Cross Rates}
+\kw{Percentage spread:}\quad
+$\dsp\frac{\mathrm{Ask}-\mathrm{Bid}}{\mathrm{Ask}}\times 100$\\[3pt]
+\kw{Cross (no spread):}\quad
+$\dsp e_{A/B}=\frac{e_{A/\$}}{e_{B/\$}}$\\[3pt]
+\kw{Cross bid:}\quad
+$\dsp\mathrm{Bid}_{B/A}=\frac{\mathrm{Bid}_{B/\$}}{\mathrm{Ask}_{A/\$}}$\\[3pt]
+\kw{Cross ask:}\quad
+$\dsp\mathrm{Ask}_{B/A}=\frac{\mathrm{Ask}_{B/\$}}{\mathrm{Bid}_{A/\$}}$\\[2pt]
+\kw{Reciprocal quotes:}
+$\mathrm{Bid}_{A/B}=\dfrac{1}{\mathrm{Ask}_{B/A}}$\quad
+$\mathrm{Ask}_{A/B}=\dfrac{1}{\mathrm{Bid}_{B/A}}$
+\end{fsect}
+
+\begin{fsect}{Triangular Arbitrage}
+\kw{Implied cross:}\quad $e_{A/B}^{*}=e_{A/\$}/e_{B/\$}$\\[1pt]
+Compare $e_{A/B}^{*}$ to quoted $e_{A/B}$:
+if different $\Rightarrow$ arbitrage.\\[1pt]
+Buy cheapest route; sell dearest.\\
+Profit $=$ ending amount $-$ starting amount.
+\end{fsect}
+
+\begin{fsect}{Forward Rates}
+\kw{Outright from swap points:}
+\[
+  F = S_0 + \text{swap pts}\times 0.0001
+\]
+\kw{Annualised forward premium (+) / discount (--):}
+\[
+  \text{Prem/disc} = \frac{F-S_0}{S_0}\times\frac{360}{\mathrm{days}}\times 100
+\]
+$+$: FC at premium (home expected to depreciate).\\
+$-$: FC at discount (home expected to appreciate).
+\end{fsect}
+
+%% ── COLUMN 2 ─────────────────────────────────────────────────────────────────
+\columnbreak
+
+\begin{fsect}{Purchasing Power Parity (PPP)}
+\kw{Absolute} (Law of One Price):\quad $e_0=P_h/P_f$\\[3pt]
+\kw{Relative --- Exact:}
+\[
+  e_t = e_0\!\left(\frac{1+\ih}{1+\iif}\right)^{\!t}
+\]
+Higher home inflation $\Rightarrow$ home currency depreciates.\\[2pt]
+\kw{Relative --- Approx:}\quad
+$\dsp\frac{e_t-e_0}{e_0}\approx \ih - \iif$\\[3pt]
+\kw{Real exchange rate:}
+\[
+  e_t^{\text{real}} = e_t^{\text{nom}}\!\left(\frac{1+\iif}{1+\ih}\right)^{\!t}
+\]
+$e_t^{\text{real}}=e_0$: PPP held.\quad $e_t^{\text{real}}\neq e_0$: PPP failed.
+\end{fsect}
+
+\begin{fsect}{Fisher Effect (FE)}
+\kw{Exact:}\quad $(1+r)=(1+a)(1+i)$\\[1pt]
+\kw{Approx:}\quad $r\approx a+i$\\[1pt]
+\kw{Real rate:}\quad $\dsp a=\frac{1+r}{1+i}-1$\\[1pt]
+\ex{Use exact when inflation is large.}
+\end{fsect}
+
+\begin{fsect}{Generalised Fisher Effect (GFE)}
+Real rates equalise internationally: $a_h=a_f$, so:
+\[
+  \frac{1+\rh}{1+\rf}=\frac{1+\ih}{1+\iif}
+\]
+\kw{Approx:}\quad $\rh-\rf\approx\ih-\iif$\\
+Nominal rate diff $\approx$ inflation diff.
+\ex{GFE bridges PPP and IFE.}
+\end{fsect}
+
+\begin{fsect}{International Fisher Effect (IFE)}
+\kw{Exact:}\quad
+$\dsp e_t = e_0\!\left(\frac{1+\rh}{1+\rf}\right)^{\!t}$\\[3pt]
+\kw{Approx:}\quad
+$\dsp\frac{e_t-e_0}{e_0}\approx \rh-\rf$\\[2pt]
+Home $\uparrow$ nominal rate $\Rightarrow$ home currency depreciates.\\
+Risky (uncovered): actual spot may differ.\\[1pt]
+\kw{Solving for unknown rate:}
+$\dsp\rh =\left(\frac{e_t}{e_0}\right)^{\!1/t}(1+\rf)-1$
+\end{fsect}
+
+\begin{fsect}{Interest Rate Parity (IRP)}
+\kw{No-arb condition (exact):}
+\[
+  f_t = e_0\!\left(\frac{1+\rh}{1+\rf}\right)^{\!t}
+\]
+\kw{Approx:}\quad
+$\dsp\frac{f_t-e_0}{e_0}\approx\rh-\rf$\\[2pt]
+IRP $\equiv$ IFE formula but LHS is \textit{forward} rate (riskless, locked in).\\
+Enforced by covered interest arbitrage (CIA).\\[2pt]
+\kw{UFR:} IRP + IFE both hold $\Rightarrow f_t=e_t$
+\end{fsect}
+
+%% ── COLUMN 3 ─────────────────────────────────────────────────────────────────
+\columnbreak
+
+\begin{fsect}{Parity Conditions Summary}
+{\fontsize{6.0}{7.5}\selectfont\linespread{1}
+PPP:\quad $e_t=e_0\!\left(\frac{1+\ih}{1+\iif}\right)^t$\quad Approx: $\Delta\%e\approx \ih{-}\iif$\\[2pt]
+Fisher:\quad $(1+r)=(1+a)(1+i)$\quad Approx: $r\approx a{+}i$\\[2pt]
+GFE:\quad $\frac{1+\rh}{1+\rf}=\frac{1+\ih}{1+\iif}$\quad Approx: $\rh{-}\rf\approx\ih{-}\iif$\\[2pt]
+IFE:\quad $e_t=e_0\!\left(\frac{1+\rh}{1+\rf}\right)^t$\quad Approx: $\Delta\%e\approx\rh{-}\rf$\\[2pt]
+IRP:\quad $f_t=e_0\!\left(\frac{1+\rh}{1+\rf}\right)^t$\quad Approx: $\Delta\%f\approx\rh{-}\rf$\\[2pt]
+UFR: $f_t=e_t$ (if IRP and IFE both hold)
+}
+\end{fsect}
+
+\begin{fsect}{Covered Interest Arbitrage (CIA)}
+\kw{Step 1:} Compute $f_t^{*}=e_0(1+\rh)/(1+\rf)$.\\[1pt]
+\kw{If} $f_t>f_t^{*}$:\; borrow HC $\to$ buy FC $\to$ invest at $\rf$ $\to$ sell FC forward.\\[1pt]
+\kw{If} $f_t<f_t^{*}$:\; borrow FC $\to$ buy HC $\to$ invest at $\rh$ $\to$ sell HC forward.\\[1pt]
+\kw{Hedged FC return (per unit HC):}
+\[
+  R = \frac{1}{e_0}(1+\rf)\cdot f_t - (1+\rh)
+\]
+$R>0$: arb profit.\quad $R<0$: no arb.\\
+Transaction cost $\delta$ per leg kills arb if $R<2\delta$.
+\end{fsect}
+
+\begin{fsect}{Currency Futures}
+\kw{Daily P/L:}
+$(\text{today's price}-\text{prev.\ settlement})\times\text{contr.\ size}$\\[1pt]
+\kw{Total P/L:}
+$(P_{\text{final}}-P_{\text{entry}})\times\text{contract size}$\\[1pt]
+\kw{\# Contracts:}\quad $\text{FC exposure}\div\text{contract size}$\\[1pt]
+\kw{Payable} FC $\Rightarrow$ \kw{buy} (long);\quad
+\kw{Receivable} FC $\Rightarrow$ \kw{sell} (short).\\[1pt]
+Margin call $\to$ top up to \kw{initial} margin (not maintenance).\\[1pt]
+Futures--forward arb profit:
+$|P_{\text{fut}}-P_{\text{fwd}}|\times\text{contract size}$
+\end{fsect}
+
+\begin{fsect}{Currency Options}
+\kw{Long call:}\quad
+$\pi=\max(S_T{-}K,0)-c$\quad B/E: $S_T=K+c$\\
+\kw{Short call:}\quad
+$\pi=c-\max(S_T{-}K,0)$\quad max gain $=c$\\
+\kw{Long put:}\quad
+$\pi=\max(K{-}S_T,0)-p$\quad B/E: $S_T=K-p$\\
+\kw{Short put:}\quad
+$\pi=p-\max(K{-}S_T,0)$\quad max gain $=p$\\[1pt]
+ITM: call if $S_T>K$;\; put if $S_T<K$.\\
+OTM: call if $S_T<K$;\; put if $S_T>K$.\\[1pt]
+Total profit $=$ per-unit profit $\times$ contract size.\\
+\kw{Known} exposure $\Rightarrow$ futures.\quad
+\kw{Contingent} $\Rightarrow$ option.
+\end{fsect}
+
+\begin{fsect}{Swaps}
+\kw{Total gain from swap:}\quad
+$\Delta_{\text{fixed}}-\Delta_{\text{floating}}>0$\\
+Each party borrows where it has comparative advantage.\\[1pt]
+\kw{IR swap:} same currency; \kw{no} principal exchange.\\
+\kw{Currency swap:} diff.\ currencies; principal \kw{is} exchanged.\\[1pt]
+\ex{Trap: yen 6\% vs.\ USD 10\% is not "free 4\%" --- lower yen rate reflects expected yen appreciation (IFE).}
+\end{fsect}
+
+\end{multicols}
+
+\vspace{1pt}
+
+%% ─── EXAM TRAPS (full width) ─────────────────────────────────────────────────
+\begin{trapbox}
+\begin{multicols}{2}
+\fontsize{6.2}{7.8}\selectfont
+\begin{itemize}
+  \item \kw{Convention:} $e=\text{HC}/\text{FC}$; $e\uparrow$=home depreciates; $e\downarrow$=home appreciates.
+  \item \kw{Asymmetric:} A depreciates $x\%$ $\Rightarrow$ B appreciates $x/(1{-}x)\times100\%$ (NOT $x\%$).
+  \item \kw{Dealer:} buys at \textit{bid}, sells at \textit{ask}; customer buys FC at \textit{ask}, sells FC at \textit{bid}.
+  \item \kw{Reciprocal bid/ask:} $\mathrm{Bid}_{A/B}=1/\mathrm{Ask}_{B/A}$; $\mathrm{Ask}_{A/B}=1/\mathrm{Bid}_{B/A}$.
+  \item \kw{Cross rates:} cross \textit{bid} = bid/\textbf{ask}; cross \textit{ask} = ask/\textbf{bid}.
+  \item \kw{Period matching:} use periodic rate, not annual (e.g.\ 3\% for 6-month contract if annual = 6\%).
+\end{itemize}
+\columnbreak
+\begin{itemize}
+  \item \kw{Decimals:} convert \% to decimals before substituting ($6\%\to0.06$).
+  \item \kw{Exact vs.\ approx:} use exact unless question says ``approximately''; critical at large rates.
+  \item \kw{360-day rule:} forward premium/discount formula uses 360 days.
+  \item \kw{Margin call:} top up to \textit{initial} margin, not maintenance margin.
+  \item \kw{IFE vs.\ IRP:} same RHS --- $e_t$ (expected spot, risky/uncovered) vs.\ $f_t$ (forward, locked in/covered).
+  \item \kw{Currency swap trap:} comparing nominal rates in different currencies is misleading without adjusting for expected exchange rate changes (IFE).
+\end{itemize}
+\end{multicols}
+\end{trapbox}
+
+\end{document}
