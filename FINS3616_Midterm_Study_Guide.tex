@@ -461,7 +461,7 @@ Note: when the lira falls 17\%, the dollar rises by more than 17\% (here, approx
 
 Week 2 covers two closely related topics. Chapter 6 provides a detailed account of how the foreign exchange market is actually organised and how spot and forward transactions are conducted. Chapter 4 (Part 1) introduces the first two of the five major parity conditions — absolute and relative purchasing power parity (PPP) — which underpin the rest of the course.
 
-Understanding the FX market mechanics is practical: students must be able to determine whether to use a bid or an ask rate, compute cross rates with bid-ask spreads, detect triangular arbitrage, and use forward contracts to hedge FX exposure. Understanding PPP is theoretical but also quantitative: the relative PPP formula is directly tested in tutorial calculations.
+Understanding the FX market mechanics is practical: students must be able to determine whether to use a bid or an ask rate, compute cross rates with bid-ask spreads, detect triangular arbitrage, and use forward contracts to hedge FX exposure. Understanding PPP is theoretical but also quantitative: the relative PPP formula is directly tested in tutorial~calculations.
 
 \subsection{Learning Outcomes}
 
@@ -758,7 +758,7 @@ Relative PPP holds best: (a) over long periods among countries with moderate inf
 \begin{enumerate}
   \item In the FX market, always use the bid when selling and the ask when buying (from the dealer's perspective, you always receive the worse rate).
   \item Outright forward rates $=$ spot rate $+$ swap points (in pips).
-  \item A positive forward premium/discount formula gives an annualised rate; multiply by $360/n$ where $n$ is the number of days.
+  \item The forward premium/discount formula gives an annualised rate (multiply by $360/n$, where $n$ is the number of days in the forward period).
   \item Absolute PPP: $e_0 = P_h / P_f$; does not hold in practice due to trade barriers and non-traded goods.
   \item Relative PPP (exact): $e_t = e_0 \times (1+i_h)^t/(1+i_f)^t$; approximation: $\Delta\% e \approx i_h - i_f$.
   \item The real exchange rate adjusts the nominal rate for inflation; if the real rate is unchanged, PPP holds.
@@ -1464,7 +1464,7 @@ Absolute PPP & Price levels $\leftrightarrow$ spot rate & $e_0 = P_h/P_f$ & --- 
 Relative PPP & Inflation $\leftrightarrow$ spot change & $e_t = e_0 \times (1+i_h)^t/(1+i_f)^t$ & $\Delta\%e \approx i_h - i_f$ \\
 Fisher Effect & Inflation $\leftrightarrow$ nominal rates & $(1+r) = (1+a)(1+i)$ & $r \approx a + i$ \\
 IFE & Interest rates $\leftrightarrow$ spot change & $e_t = e_0 \times (1+r_h)^t/(1+r_f)^t$ & $\Delta\%e \approx r_h - r_f$ \\
-IRP & Interest rates $\leftrightarrow$ forward rate & $f_t = e_0 \times (1+r_h)^t/(1+r_f)^t$ & $\Delta\%f \approx r_h - r_f$ \\
+IRP & Interest rates $\leftrightarrow$ forward premium & $f_t = e_0 \times (1+r_h)^t/(1+r_f)^t$ & $\Delta\%f \approx r_h - r_f$ \\
 UFR & Forward rate $\leftrightarrow$ future spot & $f_t = e_t$ & --- \\
 \bottomrule
 \end{tabular}
