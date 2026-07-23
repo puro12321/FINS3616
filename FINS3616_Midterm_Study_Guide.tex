@@ -461,7 +461,7 @@ Note: when the lira falls 17\%, the dollar rises by more than 17\% (here, approx
 
 Week 2 covers two closely related topics. Chapter 6 provides a detailed account of how the foreign exchange market is actually organised and how spot and forward transactions are conducted. Chapter 4 (Part 1) introduces the first two of the five major parity conditions — absolute and relative purchasing power parity (PPP) — which underpin the rest of the course.
 
-Understanding the FX market mechanics is practical: students must be able to determine whether to use a bid or an ask rate, compute cross rates with bid-ask spreads, detect triangular arbitrage, and use forward contracts to hedge FX exposure. Understanding PPP is theoretical but also quantitative: the relative PPP formula is directly tested in tutorial calculations.
+Understanding the FX market mechanics is practical: students must be able to determine whether to use a bid or an ask rate, compute cross rates with bid-ask spreads, detect triangular arbitrage, and use forward contracts to hedge FX exposure. Understanding PPP is theoretical but also quantitative: the relative PPP formula is directly tested in tutorial~calculations.
 
 \subsection{Learning Outcomes}
 
@@ -758,7 +758,7 @@ Relative PPP holds best: (a) over long periods among countries with moderate inf
 \begin{enumerate}
   \item In the FX market, always use the bid when selling and the ask when buying (from the dealer's perspective, you always receive the worse rate).
   \item Outright forward rates $=$ spot rate $+$ swap points (in pips).
-  \item A positive forward premium/discount formula gives an annualised rate; multiply by $360/\text{days}$.
+  \item The forward premium/discount formula gives an annualised rate (multiply by $360/n$, where $n$ is the number of days in the forward period).
   \item Absolute PPP: $e_0 = P_h / P_f$; does not hold in practice due to trade barriers and non-traded goods.
   \item Relative PPP (exact): $e_t = e_0 \times (1+i_h)^t/(1+i_f)^t$; approximation: $\Delta\% e \approx i_h - i_f$.
   \item The real exchange rate adjusts the nominal rate for inflation; if the real rate is unchanged, PPP holds.
@@ -766,7 +766,7 @@ Relative PPP holds best: (a) over long periods among countries with moderate inf
 
 \subsubsection*{Formula Summary}
 \begin{center}
-\begin{tabular}{lll}
+\begin{tabular}{lp{5.2cm}p{4.2cm}}
 \toprule
 \textbf{Formula} & \textbf{Equation} & \textbf{Use} \\
 \midrule
@@ -792,7 +792,7 @@ Real exchange rate & $e_t^{\text{real}} = e_t^{\text{nom}} \times (1+i_f)^t/(1+i
 \end{itemize}
 
 \subsubsection*{Sources Used for Week 2}
-\textit{Lecture material:} chapter4\_mfm\_slides2026 (Edit)[1] Read-Only; chapter6\_mfm\_slides2026 (Edit)[3] Read-Only; FINS3616 Lecture B T-transcript W2 B. \textit{Tutorial material:} Tutorial Questions for Week 2; Tutorial questions and their solutions for Week 2. \textit{Supplementary material:} Week 2 Ch 4-extra proofs and comments-Part 1; Week 2 Ch 6-extra proofs and comments-revised version.
+{\sloppy\textit{Lecture material:} chapter4\_mfm\_slides2026 (Edit)[1] Read-Only; chapter6\_mfm\_slides2026 (Edit)[3] Read-Only; FINS3616 Lecture B T-transcript W2 B\@. \textit{Tutorial material:} Tutorial Questions for Week 2; Tutorial questions and their solutions for Week 2. \textit{Supplementary material:} Week 2 Ch 4-extra proofs and comments-Part 1; Week 2 Ch 6-extra proofs and comments-revised version.\par}
 
 \newpage
 
@@ -1318,14 +1318,14 @@ Less opportunity cost on premium: $\$4{,}312.50 \times 0.08 \times (60/365) = \$
 \subsubsection{Futures vs.\ Options for Hedging}
 
 \begin{center}
-\begin{tabular}{lll}
+\begin{tabular}{lp{5cm}p{5cm}}
 \toprule
  & \textbf{Futures/Forwards} & \textbf{Options} \\
 \midrule
 Obligation & Must transact at set price & Right, not obligation \\
 Best for & Known future currency flows & Contingent (uncertain) currency flows \\
 Downside protection & Full (eliminates risk both ways) & Full downside; keeps upside \\
-Upside potential & Eliminated & Retained (buyer can choose not to exercise) \\
+Upside potential & Eliminated & Retained (buyer may choose not to exercise) \\
 Cost & Bid-ask spread only & Option premium (upfront) \\
 \bottomrule
 \end{tabular}
@@ -1446,7 +1446,7 @@ In May 1988, Walt Disney sold a 20-year stream of yen royalties (PV = ¥93 billi
 \end{itemize}
 
 \subsubsection*{Sources Used for Week 4}
-\textit{Lecture material:} chapter7\_mfm\_slides2026-2; chapter8\_mfm\_slides2026-2; FINS3616 Lecture A M-transcript W4 A; FINS3616 Lecture B T-transcript W4 B. \textit{Tutorial material:} Questions for Chs 7 and 8 (repository filename: ``Quetions for Chs 7 and 8''); Final Week 4 final Tutorial Solutions (Updated).
+{\sloppy\noindent\textit{Lecture material:} chapter7\_mfm\_slides2026-2; chapter8\_mfm\_slides2026-2; FINS3616 Lecture A M-transcript W4 A; FINS3616 Lecture B T-transcript W4 B\@. \textit{Tutorial material:} Questions for Chs 7 and 8; Final Week 4 final Tutorial Solutions (Updated).\par}
 
 \newpage
 
@@ -1456,7 +1456,7 @@ In May 1988, Walt Disney sold a 20-year stream of yen royalties (PV = ¥93 billi
 The five parity conditions form a unified framework in which each condition links a pair of economic variables. Understanding the connections prevents treating each formula as an isolated memorisation exercise.
 
 \begin{center}
-\begin{tabular}{llll}
+\begin{tabular}{lp{3.6cm}p{3.8cm}p{2.4cm}}
 \toprule
 \textbf{Condition} & \textbf{Links} & \textbf{Exact form} & \textbf{Approx.} \\
 \midrule
@@ -1771,7 +1771,7 @@ Students use absolute PPP to forecast future exchange rates. Absolute PPP asks w
 \textbf{Methods to practise:}
 \begin{itemize}[leftmargin=2em]
   \item[\cb] Converting a foreign price to home currency
-  \item[\cb] Identifying the direction of exchange-rate change given inflation/interest rate/growth changes
+  \item[\cb] Identifying the direction of exchange-rate change given inflation, interest rate, or growth changes
 \end{itemize}
 
 \subsection*{Week 2}
@@ -1851,6 +1851,7 @@ Students use absolute PPP to forecast future exchange rates. Absolute PPP asks w
 %% ══════════════════════════════════════════════════════════════════════════════
 \section{Source Register}
 
+{\sloppy
 The following repository files were used in compiling this study guide.
 
 \subsection*{Week 1}
@@ -1889,5 +1890,7 @@ The following repository files were used in compiling this study guide.
 
 \vspace{0.5cm}
 \noindent\textit{Note: The DOC testbank files are present in the repository but contain only theme metadata and no accessible question content. The study guide is therefore based on the PDF and TXT sources listed above.}
+
+} % end \sloppy
 
 \end{document}
